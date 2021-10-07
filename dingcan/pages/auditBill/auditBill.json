@@ -1,0 +1,6 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "订餐记录",
+  "onReachBottomDistance":0 ,
+  "backgroundTextStyle":"dark"
+}

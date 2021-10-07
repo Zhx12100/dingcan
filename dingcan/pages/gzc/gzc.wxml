@@ -1,0 +1,363 @@
+<view class="container">
+  <image src="/images/blueBack2.png" mode="heightFix"></image>
+  <!-- <view class="remark-box">
+    <view class="title">
+      不通过原因
+    </view>
+    <view class="text" style="color:#F56C6C;">
+      {{detail.meet_order.audit_reason}}
+    </view>
+  </view> -->
+  <!-- 订餐信息 -->
+  <view class="info-box-middle">
+    <view class="tit">
+      <view class="img-box">
+        <image src="/images/meishi2x.png"></image>
+      </view>
+      <view class="text">
+        订餐信息
+      </view>
+    </view>
+    <view class="cont">
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            订餐人：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <input type="text" class="inputs" value="{{formData.name}}" bindinput="bindName"
+              placeholder-style="color:#ccc;" placeholder="请填写订餐人姓名" />
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            联系电话：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <input type="digit" class="inputs" value="{{formData.phone}}" bindinput="bindPhone"
+              placeholder-style="color:#ccc;" placeholder="请填写联系电话" />
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            订餐房间：
+          </view>
+        </view>
+        <view class="right tipss">
+          <view class="tips">
+            <view class="input" bindtap="showDetail">
+              <!-- <view wx:if="{{roomText.length>0}}" class="in-b" wx:for="{{roomText}}" wx:key="value" wx:for-item="item" wx:for-index="index">
+                 {{item}} 、
+              </view> -->
+              <view style="color: #d6d2d2;" wx:if="{{roomText==''}}">
+                请选择订餐房间
+              </view>
+              <view class="in-b" wx:else="">
+                {{roomText}}<view class="tips">{{roomTips}}</view>
+              </view>
+
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box downLoad-box">
+        <view class="ico">
+          <view class="title">
+            订餐日期：
+          </view>
+        </view>
+        <view class="right tipss">
+          <view class="tips">
+            <picker mode="date" value="{{formData.reserve_date}}" start="{{startTime}}" bindchange="bindStartTimeChange">
+              <view class="picker {{formData.reserve_date?'bld':''}}">
+                {{formData.reserve_date==''?'请选择订餐日期':formData.reserve_date}}
+              </view>
+            </picker>
+            <view class="opload">
+              <image src="/images/rili@2x.png" mode="widthFix"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box mealTime-box">
+        <view class="ico">
+          <view class="title">
+            订餐时段：
+          </view>
+        </view>
+        <view class="right tipss">
+          <view class="tips">
+            <view class="input">
+              <radio-group bindchange="changeMealTime" class="mealTime">
+                <label class="" wx:for="{{meal_time}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                  <view class="select">
+                    <radio color="#3377FF" value="{{item.meal_id}}" checked="" />
+                  </view>
+                  <view class="info">
+                    <view class="name">{{item.meal}}</view>
+                  </view>
+                </label>
+              </radio-group>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 最高级别用餐人 -->
+  <view class="info-box-middle">
+    <view class="tit">
+      <view class="img-box">
+        <image src="/images/yongcangren@2x.png"></image>
+      </view>
+      <view class="text">
+        最高级别用餐人信息
+      </view>
+    </view>
+    <view class="cont">
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            姓名：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <input type="text" class="inputs" value="{{formData.max_name}}" bindinput="bindMaxName"
+              placeholder-style="color:#ccc;" placeholder="请填写名称" />
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            职务：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <input type="text" class="inputs" value="{{formData.max_position}}" bindinput="bindMaxPosition"
+              placeholder-style="color:#ccc;" placeholder="请填写名称" />
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 其他信息 -->
+  <view class="info-box-middle">
+    <!-- <view class="tit">
+      <view class="img-box">
+        <image src="/images/yongcangren@2x.png"></image>
+      </view>
+      <view class="text">
+        其他信息
+      </view>
+    </view> -->
+    <view class="title">
+      其他信息
+    </view>
+    <view class="cont">
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            结算单位：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <input type="text" class="inputs" value="{{formData.settle_part}}" bindinput="bindSettlePart"
+              placeholder-style="color:#ccc;" placeholder="请填写结算单位" />
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            用餐人数：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <input type="text" class="inputs" value="{{formData.dining_count}}" bindinput="bindDiningCount"
+              placeholder-style="color:#ccc;" placeholder="请填写用餐人数" />
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            司陪人数：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <input type="text" class="inputs" value="{{formData.other_count}}" bindinput="bindOtherCount"
+              placeholder-style="color:#ccc;" placeholder="请填写司陪人数" />
+          </view>
+        </view>
+      </view>
+      <view class="inp-box mealTime-box repast-box">
+        <view class="ico">
+          <view class="title">
+            就餐方式：
+          </view>
+        </view>
+        <view class="right tipss">
+          <view class="tips">
+            <view class="input">
+              <radio-group bindchange="changeRepast" class="mealTime">
+                <label class="" wx:for="{{repast_arr}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                  <view class="select">
+                    <radio color="#3377FF" value="{{item.repast_id}}" checked="" />
+                  </view>
+                  <view class="info">
+                    <view class="name">{{item.repast}}</view>
+                  </view>
+                </label>
+              </radio-group>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box mealTime-box repast-box">
+        <view class="ico">
+          <view class="title">
+            用餐性质：
+          </view>
+        </view>
+        <view class="right tipss">
+          <view class="tips">
+            <view class="input">
+              <radio-group bindchange="changeHave" class="mealTime">
+                <label class="" wx:for="{{have_arr}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                  <view class="select">
+                    <radio color="#3377FF" value="{{item.have_id}}" checked="" />
+                  </view>
+                  <view class="info">
+                    <view class="name">{{item.have}}</view>
+                  </view>
+                </label>
+              </radio-group>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box downLoad-box">
+        <view class="ico">
+          <view class="title">
+            接待函附件：
+          </view>
+        </view>
+        <view class="right tipss">
+          <view class="tips">
+            <view class="fujian" wx:if="{{formData.extra_file==''}}">
+              请上传附件
+            </view>
+            <view class="fujain2" wx:if="{{formData.extra_file!=''}}">
+              {{extra_file_name}}
+            </view>
+            <view class="opload" bindtap="goFiles" wx:if="{{formData.extra_file==''}}">
+              <image src="/images/shangchuan.png" mode="widthFix"></image>
+            </view>
+            <view class="opload" bindtap="deleteFiles" wx:if="{{formData.extra_file!=''}}">
+              <image src="/images/guanbi2.png" mode="widthFix"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="remark-box">
+    <view class="title">
+      水牌备注 <view class="tips1">（非必填）</view>
+    </view>
+    <textarea bindinput="bindBrandNote" name="" id="" cols="30" rows="10" placeholder="请填写备注内容">
+
+    </textarea>
+    <!-- <view class="text">
+      需用落地水牌写明：欢迎北京市检查小组莅临我 市进行指导！
+    </view> -->
+  </view>
+  <view class="remark-box">
+    <view class="title">
+      订餐备注 <view class="tips1">（非必填）</view>
+    </view>
+    <textarea name="" bindinput="bindReserveNote" id="" cols="30" rows="10" placeholder="请填写备注内容">
+
+    </textarea>
+  </view>
+  <!-- <view class="liucheng-box">
+    <view class="title">
+      流程
+    </view>
+    <view class="liuc">
+      <view class="list">
+        <view class="but active">
+        </view>
+        <view class="text">
+          <view class="sp1">
+            <view class="one">发起申请</view>
+            <view class="two">2021.09.08 18：22</view>
+          </view>
+          <view class="sp2">
+            李建明
+          </view>
+        </view>
+      </view>
+      <view class="list">
+        <view class="but">
+        </view>
+        <view class="text">
+          <view class="sp1">
+            <view class="one">发起申请</view>
+            <view class="two wait">待审批</view>
+          </view>
+          <view class="sp2"></view>
+        </view>
+      </view>
+    </view>
+  </view> -->
+  <!-- wx:if="{{detail.meet_order.audit_status=='审核中'}}" -->
+  <view class="operate-box">
+    <button class="audit" bindtap="auditTure">提交预订</button>
+  </view>
+
+  <view class="model" style="top:{{detailTop}}%">
+    <view class="content">
+      <view class="img-box" bindtap="hideDetail">
+        <image src="/images/guanbi.png"></image>
+      </view>
+      <view class="title">
+        时段选择
+      </view>
+      <view class="cont">
+        <view class="way-box">
+          <view class="way">
+            <radio-group bindchange="checkboxChange">
+              <label class="" wx:for="{{detail.room_list}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                <view class="info">
+                  <view class="name">{{item.room_no}}</view>
+                  <view class="tips">（可容纳{{item.people_count}}人）</view>
+                </view>
+                <view class="select">
+                  <radio color="#3377FF" value="{{item.room_id}}" checked="" />
+                </view>
+              </label>
+            </radio-group>
+          </view>
+        </view>
+      </view>
+      <view class="but-box" bindtap="hideDetail">
+        <button>确定</button>
+      </view>
+    </view>
+  </view>
+</view>

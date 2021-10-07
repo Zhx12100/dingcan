@@ -1,0 +1,36 @@
+{
+    "setting": {},
+    "condition": {
+        "plugin": {
+            "list": []
+        },
+        "game": {
+            "list": []
+        },
+        "gamePlugin": {
+            "list": []
+        },
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "pages/gzc/gzc",
+                    "pathName": "pages/gzc/gzc",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/jbc/jbc",
+                    "pathName": "pages/jbc/jbc",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/my/my",
+                    "pathName": "pages/my/my",
+                    "query": "",
+                    "scene": null
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,323 @@
+<wxs module="filters" src="./filters.wxs"></wxs>
+<view class="container">
+  <image src="/images/blueBack2.png" mode="heightFix"></image>
+  <!-- 订餐信息 -->
+  <view class="info-box-middle">
+    <view class="tit">
+      <view class="img-box">
+        <image src="/images/meishi.png"></image>
+      </view>
+      <view class="text">
+        订餐信息：
+      </view>
+    </view>
+    <view class="cont">
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            订餐类型：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">{{filters.getSwitchStatus(detail.meal_type)}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            订餐人：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">{{detail.name}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            订餐电话：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">{{detail.phone}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            订餐日期：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">{{detail.reserve_date}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            订餐时段：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">
+              {{filters.getSwitchTime(detail.meal_time)}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            用餐人数：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">
+              {{detail.dining_count}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            其他附件：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input down-blue" bindtap="downLoadFile" wx:if="{{detail.work.extra_file!=''}}">
+            <!-- {{detail.meet_order.extra_file}} -->
+            点击查看附件
+            </view>
+            <view wx:else>暂无附件</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="status-box">
+      <image mode="widthFix" wx:if="{{detail.audit_status=='不通过'}}" src="/images/butongguo.png"></image>
+      <image mode="widthFix" wx:if="{{detail.audit_status=='审核通过'}}" src="/images/yitongguo.png"></image>
+      <image mode="widthFix" wx:if="{{detail.audit_status=='已完成'}}" src="/images/yiwancheng.png"></image>
+      <image mode="widthFix" wx:if="{{detail.audit_status=='已关闭'}}" src="/images/yiguanbi.png"></image>
+    </view>
+  </view>
+  <!-- 最高级别用餐人信息 -->
+  <view class="info-box-middle" wx:if="{{detail.meal_type==1}}">
+    <view class="tit">
+      <view class="img-box">
+        <image src="/images/yongcan@2x.png"></image>
+      </view>
+      <view class="text">
+        最高级别用餐人信息：
+      </view>
+    </view>
+    <view class="cont">
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            姓名：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">{{detail.work.max_name}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            职务：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">{{detail.work.max_position}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 其他信息 -->
+  <view class="info-box-middle" wx:if="{{detail.meal_type==1}}">
+    <view class="title">
+      其他信息
+    </view>
+    <view class="cont">
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            结算单位：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">{{detail.work.settle_part}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            司陪人数：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">{{detail.work.other_count}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            就餐方式：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">{{detail.work.meal_way==1?'围餐':'自助餐'}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            用餐性质：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">{{detail.work.meal_property==1?'商务接待':'普通接待'}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            接待函附件：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input down-blue" bindtap="downLoadFile" wx:if="{{detail.work.extra_file!=''}}">
+            <!-- {{detail.meet_order.extra_file}} -->
+            点击查看附件
+            </view>
+            <view wx:else>暂无附件</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 不通过原因 -->
+  <view class="remark-box" wx:if="{{detail.audit_status=='不通过'}}">
+    <view class="title">
+      不通过原因
+    </view>
+    <view class="text" style="color:#F56C6C;">
+      {{detail.audit_reason}}
+    </view>
+  </view>
+  <!-- 水牌备注 -->
+  <view class="remark-box" wx:if="{{detail.meal_type==1}}">
+    <view class="title">
+      水牌备注
+    </view>
+    <view class="text">
+      {{detail.work.brand_note||'暂无备注'}}
+    </view>
+  </view>
+  <!-- 订餐备注 -->
+  <view class="remark-box">
+    <view class="title">
+      订餐备注
+    </view>
+    <view class="text">
+      {{detail.meal_note||'暂无备注'}}
+    </view>
+  </view>
+  <!-- <view class="liucheng-box">
+    <view class="title">
+      流程
+    </view>
+    <view class="liuc">
+      <view class="list">
+        <view class="but active">
+        </view>
+        <view class="text">
+          <view class="sp1">
+            <view class="one">发起申请</view>
+            <view class="two">2021.09.08 18：22</view>
+          </view>
+          <view class="sp2">
+            李建明
+          </view>
+        </view>
+      </view>
+      <view class="list">
+        <view class="but">
+        </view>
+        <view class="text">
+          <view class="sp1">
+            <view class="one">发起申请</view>
+            <view class="two wait">待审批</view>
+          </view>
+          <view class="sp2"></view>
+        </view>
+      </view>
+    </view>
+  </view> -->
+  <!-- wx:if="{{detail.meet_order.audit_status=='审核中'}}" -->
+  <view class="operate-box" wx:if="{{detail.audit_status=='审核中'}}">
+    <button class="audit-none" bindtap="auditFalse">审批不通过</button>
+    <button class="audit" bindtap="auditTure">审批通过</button>
+  </view>
+  <!-- 不通过原因 -->
+  <view class="model" style="top:{{detailTop}}%">
+    <view class="content">
+      <view class="img-box" bindtap="hideDetail">
+        <image src="/images/guanbi.png"></image>
+      </view>
+      <view class="title">
+        不通过原因
+      </view>
+      <view class="cont">
+        <view class="way-box">
+          <view class="way">
+            <radio-group bindchange="radioChange">
+              <label class="" wx:for="{{items}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                <view class="info">
+                  <view class="name">{{item.name}}</view>
+                  <view class="tips">{{item.tips}}</view>
+                </view>
+                <view class="select">
+                  <radio color="#3377FF" value="{{item.value}}" checked="" />
+                </view>
+              </label>
+            </radio-group>
+          </view>
+          <textarea name="" placeholder="如有其他原因可在此填写" bindinput="bindReason" wx:if="{{audit_index==2}}" id="" cols="30" rows="10">
+          </textarea>
+        </view>
+      </view>
+      <view class="but-box" bindtap="refuseAudit">
+        <button>确定</button>
+      </view>
+    </view>
+  </view>
+  <view class="operate-box" wx:if="{{detail.audit_status=='审核中'||detail.audit_statu=='审核通过'}}">
+    <button class="audit-none" bindtap="cancelOrder">关闭订餐</button>
+  </view>
+</view>

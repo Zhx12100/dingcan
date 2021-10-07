@@ -1,0 +1,27 @@
+<!--index.wxml-->
+<view class="banner">
+  <image src="/images/banner.png" mode="widthFix"></image>
+</view>
+<view class="type">
+  <view class="list" bindtap="goGzc">
+    <view class="img-box">
+      <image src="/images/gongzuocan@2x.png" mode="widthFix"></image>
+    </view>
+    <view class="text1">工作餐</view>
+    <view class="text2">二楼</view>
+  </view>
+  <view class="list" bindtap="goJbc" data-type="2">
+    <view class="img-box">
+      <image src="/images/gongzuori@2x.png" mode="widthFix"></image>
+    </view>
+    <view class="text1">加班餐</view>
+    <view class="text2">（工作日）</view>
+  </view>
+  <view class="list" bindtap="goJbc" data-type="3">
+    <view class="img-box">
+      <image src="/images/jiejiari@2x.png" mode="widthFix"></image>
+    </view>
+    <view class="text1">加班餐</view>
+    <view class="text2">（节假日）</view>
+  </view>
+</view>

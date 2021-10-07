@@ -1,0 +1,28 @@
+var filters = {
+  getSwitchStatus: function (type) {
+    console.log(type)
+    switch (type) {
+      case 1:
+        return '二楼工作餐';
+      case 2:
+        return '加班餐（工作日）';
+      case 3:
+        return '加班餐（节假日）';
+    }
+  },
+  getSwitchTime: function (time) {
+    console.log(time)
+    switch (time) {
+      case 1:
+        return '早餐';
+      case 2:
+        return '午餐';
+      case 3:
+        return '晚餐';
+    }
+  },
+}
+module.exports = {
+  getSwitchStatus: filters.getSwitchStatus,
+  getSwitchTime: filters.getSwitchTime,
+}
