@@ -16,3 +16,12 @@ export function setFreezeStatus(data) {
   })
 }
 
+export function setOrganizationId(data) {
+  return request({
+    url: '/admin/user/change_organize',
+    method: 'post',
+    data
+  })
+}
+
+

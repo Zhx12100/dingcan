@@ -6,7 +6,7 @@
         <el-input v-model="formScreen.nick_name" />
       </el-form-item>
       <el-form-item label="组织ID">
-        <el-input v-model="formScreen.openid" />
+        <el-input v-model="formScreen.organize_id" />
       </el-form-item>
       <el-form-item label="状态">
         <el-select v-model="formScreen.freeze_flag" placeholder="">
@@ -74,6 +74,12 @@
           {{ scope.row.freeze_flag ? "已禁用" : "使用中" }}
         </template>
       </el-table-column>
+      <el-table-column class-name="status-col" label="操作" align="center">
+        <template slot-scope="scope">
+          <el-tag @click="setOrganization(scope.row.openid)" size="medium">修改组织ID</el-tag>
+          <el-tag type="success" @click="setFreeze(scope.row.openid, !scope.row.freeze_flag)">{{ scope.row.freeze_flag ? "启用" : "停用" }}</el-tag>
+        </template>
+      </el-table-column>
     </el-table>
     <el-pagination class="pagination-box" @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="formScreen.page" :page-sizes="[10, 20, 50, 100]" :page-size="formScreen.page_len"
       layout="total, sizes, prev, pager, next, jumper" :total="total">
@@ -83,7 +89,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { getUserList, setFreezeStatus } from "@/api/table";
+import { getUserList, setFreezeStatus,setOrganizationId } from "@/api/table";
 export default {
   name: "Dashboard",
   data() {
@@ -91,7 +97,7 @@ export default {
       list: [],
       listLoading: true,
       formScreen: {
-        openid: "",
+        organize_id: "",
         page: 1,
         page_len: 10,
         nick_name: "",
@@ -145,6 +151,49 @@ export default {
           );
         })
         .catch(() => {});
+    },
+    setOrganization(openId) {
+      var that = this;
+      console.log(openId)
+      that
+        .$prompt("修改组织ID", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          beforeClose:(action, instance, done) => {
+            if (action === 'confirm') {
+              instance.confirmButtonLoading = true;
+              let data = {
+                openid:openId,
+                organize_id:instance.inputValue
+              }
+              setOrganizationId(data).then((response) => {
+                console.log("修改组织id", response);
+                if (response.code == 0) {
+                  that.$message({
+                    type: "success",
+                    message: "修改组织ID成功!",
+                  });
+                  that.getList();
+                  done();
+                  instance.confirmButtonLoading = false;
+                }else{
+                  console.log('false')
+                  instance.confirmButtonLoading = false;
+                }
+              }).catch(() => {
+                console.log('false')
+                  instance.confirmButtonLoading = false;
+              });;
+            }else{
+              done();
+            }
+          },
+        })
+        .then(({ value }) => {
+          
+        })
+        .catch(() => {
+        });
     },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);

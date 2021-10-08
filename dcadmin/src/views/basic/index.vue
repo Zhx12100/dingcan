@@ -33,6 +33,7 @@
                   type="date"
                   value-format="yyyy-MM-dd"
                   placeholder="选择日期"
+                  @change="changeDate"
                 >
                 </el-date-picker>
               </div>
@@ -71,7 +72,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { getToday_meal, getGet_date } from "@/api/basic";
+import { getToday_meal, getGet_date,getDay_date } from "@/api/basic";
 export default {
   name: "Basic",
   data() {
@@ -92,6 +93,11 @@ export default {
     that.getData();
     
     that.getDate()
+    var date = new Date();
+    let yy = date.getFullYear(); //获取完整的年份(4位
+    let mm = date.getMonth() + 1; 
+    let dd = date.getDate(); 
+    that.getDate2(`${yy}-${mm<10?'0'+mm:mm}-${dd<10?'0'+dd:dd}`)
     // that.getChart2();
   },
   methods: {
@@ -100,7 +106,7 @@ export default {
       getToday_meal({}).then((response) => {
         console.log("获取订餐数据", response);
         that.data = response.data;
-        that.getChart1(that.data);
+        // that.getChart1(that.data);
       });
     },
     //获取订餐人数
@@ -112,10 +118,25 @@ export default {
         that.getChart2(response.data)
       });
     },
+    //获取当日订餐人数
+    getDate2(date) {
+      let that = this;
+      getDay_date({date:date}).then((response) => {
+        console.log("获取当日订餐人数", response.data);
+        // that.data = response.data;
+        that.getChart1(response.data)
+      });
+    },
+    //获取当日订餐人数
     changeDay(val){
       let that = this
       console.log(that.value2)
       that.getDate()
+    },
+    //获取当日订餐人数
+    changeDate(val){
+      let that = this
+      that.getDate2(val)
     },
     getChart1(data) {
       let myChart = this.$echarts.init(
@@ -157,8 +178,8 @@ export default {
               show: false,
             },
             data: [
-              { value: data.ot.today_count, name: "加班餐" },
-              { value: data.work.today_count, name: "二楼工作餐" },
+              { value: data.ot_count, name: "加班餐" },
+              { value: data.work_count, name: "二楼工作餐" },
             ],
           },
         ],

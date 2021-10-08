@@ -17,3 +17,12 @@ export function getGet_date(data) {
     data
   })
 }
+
+// 根据日期获取订餐人数
+export function getDay_date(data) {
+  return request({
+    url: '/admin/meal/date_order',
+    method: 'post',
+    data
+  })
+}
