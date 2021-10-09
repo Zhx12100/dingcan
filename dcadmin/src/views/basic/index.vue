@@ -212,6 +212,9 @@ export default {
       
       // 绘制图表
       myChart.setOption({
+        tooltip: {
+          trigger: "item",
+        },
         xAxis: {
           type: "category",
           data: dateArr,

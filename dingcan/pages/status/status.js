@@ -29,7 +29,7 @@ Page({
           })
         }else{
           console.log('app.globalData.userInf',app.globalData.userInfo)
-          if(app.globalData.userInfo.role==0){//未绑定角色
+          if(app.globalData.userInfo.role==0||!app.globalData.userInfo.role){//未绑定角色
             if(app.globalData.userInfo.nick_name==''){
               wx.reLaunch({
                 url: '/pages/login/index',
