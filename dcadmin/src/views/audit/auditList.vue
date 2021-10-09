@@ -171,8 +171,8 @@
         <el-form-item label="订餐联系电话：">
           {{ detail.phone }}
         </el-form-item>
-        <el-form-item label="用餐房间：">
-          {{ detail.reserve_date }}
+        <el-form-item label="用餐房间：" v-if="detail.meal_type=='二楼工作餐'">
+          {{ detail.work.room_no }}
         </el-form-item>
         <el-form-item label="用餐人数：">
             {{ detail.dining_count }}
@@ -392,7 +392,7 @@ export default {
                   type: "success",
                   message: "修改审核状态成功!",
                 });
-                that.dialogVisibleDetail = true;
+                that.dialogVisibleDetail = false;
                 that.getList();
               }
             });

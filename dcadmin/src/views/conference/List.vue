@@ -62,7 +62,7 @@
     <el-pagination class="pagination-box" @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="formScreen.page" :page-sizes="[1,10, 20, 50, 100]" :page-size="formScreen.page_len"
       layout="total, sizes, prev, pager, next, jumper" :total="total">
     </el-pagination>
-    <el-dialog class="calendar-box" title="预定详情" :visible.sync="dialogVisible" width="600px" :before-close="handleClose">
+    <el-dialog class="calendar-box" title="预定详情" :visible.sync="dialogVisible" width="800px" :before-close="handleClose">
       <div>
         <el-calendar v-model="calendarMonth">
           <!-- 这里使用的是 2.5 slot 语法，对于新项目请使用 2.6 slot 语法-->
@@ -82,52 +82,81 @@
                   <div>预约联系人：{{item.name}} -- 预约电话：{{item.phone}}</div>
                   <!-- <div></div> -->
                 </div>
-                <div>{{item.time_list[0]}}</div>
+                <div>{{item.meal_time}}</div>
               </div>
             </template>
             <div class="detail-list">
               <el-form :inline="true" size="mini">
-                <el-form-item label="联系人:">
-                  {{item.detail.name}}
+                <el-form-item label="订餐联系人：">
+                  {{ item.detail.name }}
                 </el-form-item>
-                <el-form-item label="电话:">
-                  {{item.detail.phone}}
+                <el-form-item label="订餐联系电话：">
+                  {{ item.detail.phone }}
                 </el-form-item>
-                <el-form-item label="房间名称:">
-                  {{item.detail.meet_name}}
+                <el-form-item label="用餐房间：" v-if="item.detail.meal_type=='二楼工作餐'">
+                  {{ item.detail.work.room_no }}
                 </el-form-item>
-                <el-form-item label="预定日期:">
-                  {{item.detail.meet_date}}
+                <el-form-item label="用餐人数：">
+                  {{ item.detail.dining_count }}
                 </el-form-item>
-                <el-form-item label="水牌备注:">
-                  {{item.detail.brand_note}}
+                <el-form-item label="订餐日期：">
+                  {{ item.detail.reserve_date }}
                 </el-form-item>
-                <el-form-item label="预约备注:">
-                  {{item.detail.reserve_note}}
+                <el-form-item label="订餐时段：">
+                  {{ item.detail.meal_time }}
                 </el-form-item>
-                <el-form-item label="头像:">
-                  <img :src="item.detail.head_image" style="width:20px;height:20px" alt="">
+                <div v-if="item.detail.meal_type=='二楼工作餐'">
+                  <el-form-item label="最高级别用餐人：">
+                    <span>
+                      名称：{{item.detail.work.max_name}}<br />
+                      职务：{{item.detail.work.max_position}}
+                    </span>
+                  </el-form-item>
+                  <el-form-item label="结算单位：">
+                    {{ item.detail.work.settle_part }}
+                  </el-form-item>
+                  <el-form-item label="司陪人数：">
+                    {{ item.detail.work.other_count }}
+                  </el-form-item>
+                  <el-form-item label="就餐方式：">
+                    {{ item.detail.work.meal_way }}
+                  </el-form-item>
+                  <el-form-item label="用餐性质：">
+                    {{ item.detail.work.meal_property }}
+                  </el-form-item>
+                  <el-form-item label="接待函附件：">
+                    <a :href="baseURL + item.detail.work.extra_file" target="_blank" download="" rel="noopener noreferrer" style="color: #67c23a">{{ item.detail.work.extra_file }}</a>
+                  </el-form-item>
+                  <el-form-item label="水牌备注：">
+                    {{ item.detail.work.brand_note }}
+                  </el-form-item>
+                </div>
+                <!-- <el-form-item label="订餐备注：">
+          {{ item.detail.reserve_note }}
+        </el-form-item> -->
+                <el-form-item label="用户名称：">
+                  {{ item.detail.nick_name }}
                 </el-form-item>
-                <el-form-item label="微信名称:">
-                  {{item.detail.nick_name}}
+                <el-form-item label="组织ID：">
+                  {{ item.detail.organize_id }}
                 </el-form-item>
-                <el-form-item label="组织ID:">
-                  {{item.detail.organize_id}}
+                <el-form-item label="组织部门：">
+                  {{ item.detail.organize_part }}
                 </el-form-item>
-                <el-form-item label="组织部门:">
-                  {{item.detail.organize_part}}
+                <el-form-item label="订餐类型：">
+                  {{ item.detail.meal_type }}
                 </el-form-item>
-                <el-form-item label="审核状态:">
-                  {{item.detail.audit_status}}
+                <el-form-item label="审核状态：">
+                  {{ item.detail.audit_status }}
                 </el-form-item>
-                <el-form-item label="申请时间:">
-                  {{item.detail.apply_time}}
+                <el-form-item label="申请时间：">
+                  {{ item.detail.apply_time }}
                 </el-form-item>
-                <el-form-item label="审核时间:">
-                  {{item.detail.audit_time}}
+                <el-form-item label="审核时间：">
+                  {{ item.detail.audit_time }}
                 </el-form-item>
-                <el-form-item label="审核人:">
-                  {{item.detail.audit_man}}
+                <el-form-item label="理由：" v-if="item.detail.audit_status == '审核失败'">
+                  {{ item.detail.audit_man }}
                 </el-form-item>
               </el-form>
             </div>
@@ -161,7 +190,7 @@ export default {
         page: 1,
         page_len: 10,
         name: "",
-        status:"",
+        status: "",
       },
       pageSize: 10,
       total: 0,
@@ -245,8 +274,10 @@ export default {
       getReserveMessage({ date: day, room_id: that.room_id }).then(
         (response) => {
           console.log("获取预定信息列表", response);
+          // return false
           if (response.data) {
             that.dateMessageList = response.data;
+            // console.log(that.dateMessageList[0])
           }
         }
       );
@@ -339,9 +370,9 @@ export default {
     line-height: 1.4;
     color: #666;
   }
-  .detail-list{
+  .detail-list {
     padding: 0 20px;
-    .el-form-item{
+    .el-form-item {
       width: 50%;
       margin-right: 0;
       margin-bottom: 0;
@@ -372,6 +403,12 @@ export default {
       text-align: center;
       line-height: 58px;
     }
+  }
+  ::v-deep .el-form-item__label{
+    width: 130px;
+  }
+  ::v-deep .el-form-item__content{
+        width: 229px;
   }
 }
 .pagination-box {

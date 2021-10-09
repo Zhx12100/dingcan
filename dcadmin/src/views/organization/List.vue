@@ -41,11 +41,6 @@
           {{ scope.row.id }}
         </template>
       </el-table-column>
-      <el-table-column label="角色" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.role }} 
-        </template>
-      </el-table-column>
       <el-table-column label="组织ID" align="center">
         <template slot-scope="scope">
           {{ scope.row.organize_id }} 
@@ -113,7 +108,7 @@ export default {
       formScreen: {
         page: 1,
         page_len: 10,
-        role: "",
+        // role: "",
         organize_id: "",
         organize_part: "",
         status: "",
