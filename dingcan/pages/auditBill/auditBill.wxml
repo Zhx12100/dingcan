@@ -4,7 +4,7 @@
     <view class="img-box">
       <image src="/images/sousuo.png"></image>
     </view>
-    <input type="text" bindconfirm="onConfirms" bindinput="bindSearch" placeholder="输入房间号进行搜索" placeholder-style="color:#B3B3B3"></input>
+    <input type="text" bindconfirm="onConfirms" bindinput="bindSearch" placeholder="输入订餐人进行搜索" placeholder-style="color:#B3B3B3"></input>
   </view>
 </view>
 <view class="swiper-tab">

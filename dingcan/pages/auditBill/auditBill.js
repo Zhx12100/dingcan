@@ -11,7 +11,7 @@ Page({
     currentTab: '',
     triggered: true,
 
-    room_no: '',
+    name: '',
     page: 0,
     page_len: 5,
     list: [],
@@ -171,7 +171,7 @@ Page({
       page: that.data.page,
       page_len: that.data.page_len,
       status: that.data.currentTab,
-      room_no: that.data.room_no
+      name: that.data.name
     }
 
     wx.showNavigationBarLoading() //在标题栏中显示加载
@@ -208,7 +208,7 @@ Page({
   //搜索内容
   bindSearch: function (e) {
     this.setData({
-      room_no: e.detail.value
+      name: e.detail.value
     })
   },
 

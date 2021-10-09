@@ -1,4 +1,4 @@
-<view class="container">
+<view class="container" style="height:{{detailTop==100?'auto':'calc(100vh - 200rpx)'}};overflow: hidden;">
   <image src="/images/blueBack2.png" mode="heightFix"></image>
   <!-- <view class="remark-box">
     <view class="title">
@@ -331,12 +331,13 @@
   </view>
 
   <view class="model" style="top:{{detailTop}}%">
+  <cover-view class="zhe"></cover-view>
     <view class="content">
       <view class="img-box" bindtap="hideDetail">
         <image src="/images/guanbi.png"></image>
       </view>
       <view class="title">
-        时段选择
+        房间选择
       </view>
       <view class="cont">
         <view class="way-box">

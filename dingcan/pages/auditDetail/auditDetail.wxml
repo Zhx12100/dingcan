@@ -48,6 +48,18 @@
           </view>
         </view>
       </view>
+      <view class="inp-box"  wx:if="{{detail.meal_type==1}}">
+        <view class="ico">
+          <view class="title">
+            订餐房间：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">{{detail.work.room_no}}</view>
+          </view>
+        </view>
+      </view>
       <view class="inp-box">
         <view class="ico">
           <view class="title">
@@ -85,22 +97,6 @@
             <view class="input">
               {{detail.dining_count}}
             </view>
-          </view>
-        </view>
-      </view>
-      <view class="inp-box">
-        <view class="ico">
-          <view class="title">
-            其他附件：
-          </view>
-        </view>
-        <view class="right">
-          <view class="tips">
-            <view class="input down-blue" bindtap="downLoadFile" wx:if="{{detail.work.extra_file!=''}}">
-            <!-- {{detail.meet_order.extra_file}} -->
-            点击查看附件
-            </view>
-            <view wx:else>暂无附件</view>
           </view>
         </view>
       </view>

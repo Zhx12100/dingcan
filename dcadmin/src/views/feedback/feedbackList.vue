@@ -188,7 +188,7 @@ export default {
       });
     },
     handleClose(){
-      that.imageDialogVisible = false
+      this.imageDialogVisible = false
     },
     getImage(url){
       let that = this

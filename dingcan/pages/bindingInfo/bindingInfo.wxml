@@ -2,7 +2,7 @@
   <view class="logo-box">
     <image src="/images/blueBack.png"></image>
     <view class="cont">
-      <image src="/images/logo@2x.png.png"></image>
+      <image src="/images/logo@2x.png"></image>
       <view class="text">订餐服务平台</view>
     </view>
   </view>

@@ -36,6 +36,35 @@ Page({
     detailTop: 100,
     audit_reason: '',
     roomText: '',
+    room_list:[
+      {people_count: 10,
+        room_id: 1,
+        room_no: "10086"},
+        {people_count: 10,
+          room_id: 1,
+          room_no: "10086"},
+          {people_count: 10,
+            room_id: 1,
+            room_no: "10086"},
+            {people_count: 10,
+              room_id: 1,
+              room_no: "10086"},
+              {people_count: 10,
+                room_id: 1,
+                room_no: "10086"},
+                {people_count: 10,
+                  room_id: 1,
+                  room_no: "10086"},
+                  {people_count: 10,
+                    room_id: 1,
+                    room_no: "10086"},
+                    {people_count: 10,
+                      room_id: 1,
+                      room_no: "10086"},
+                      {people_count: 10,
+                        room_id: 1,
+                        room_no: "10086"},
+    ],
     formData: {
       order_id:'',
       room_id: '',
@@ -78,7 +107,6 @@ Page({
     that.getDetail()
     // that.showDetail()
   },
-
   getDetail() {
     let that = this
     wx.pageScrollTo({
@@ -217,6 +245,14 @@ Page({
         return false
       }
     }
+    if (!(/^1[3456789]\d{9}$/.test(data.phone))) {
+			wx.showToast({
+				title: '手机号码格式有误',
+				icon: 'none',
+				duration: 1500
+			})
+			return false
+		}
     wx.showToast({
       title: '加载中',
       icon: 'loading',

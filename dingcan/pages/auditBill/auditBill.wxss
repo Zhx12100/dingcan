@@ -128,8 +128,9 @@ page {
 .swiper-box .list .tit .status > button{
   width: auto;
   height: 40rpx;
-  background: rgba(51, 119, 255, 0.1);
-  border: 1rpx solid #7AA6FF;
+  background: white;
+  /* background: rgba(51, 119, 255, 0.1); */
+  /* border: 1rpx solid #7AA6FF; */
   border-radius: 8rpx;
   font-size: 24rpx;
   padding: 0 15rpx;
@@ -140,23 +141,23 @@ page {
 }
 .swiper-box .list .tit .status > button.dsp{
   color: #3377FF;
-  border: 1rpx solid #7AA6FF;
-  background: rgba(51, 119, 255, 0.1);
+  /* border: 1rpx solid #7AA6FF; */
+  /* background: rgba(51, 119, 255, 0.1); */
 }
 .swiper-box .list .tit .status > button.ytg{
   color: #67C23A;
-  border: 1px solid #91E169;
-  background: rgba(103, 194, 58, 0.1);
+  /* border: 1px solid #91E169; */
+  /* background: rgba(103, 194, 58, 0.1); */
 }
 .swiper-box .list .tit .status > button.btg{
   color: #F56C6C;
-  border: 1rpx solid #FD8E8E;
-  background: rgba(245, 108, 108, 0.1);
+  /* border: 1rpx solid #FD8E8E; */
+  /* background: rgba(245, 108, 108, 0.1); */
 }
 .swiper-box .list .tit .status > button.ywc{
   color: #333333;
-  border: 1rpx solid #F5F5F5;
-  background: rgba(51, 119, 255, 0.1);
+  /* border: 1rpx solid #F5F5F5; */
+  /* background: rgba(51, 119, 255, 0.1); */
 }
 .swiper-box .list .tit .no .select_active{
   width: 40rpx;
@@ -263,7 +264,7 @@ page {
 .swiper-box .list .but-box button{
   width: 160rpx;
   height: 60rpx;
-  border-radius: 50rpx;
+  border-radius: 8rpx;
   font-size: 28rpx;
   padding: 0;
   line-height: 60rpx;
@@ -274,7 +275,7 @@ page {
 .swiper-box .list .but-box button.cacel{
   border: 2rpx solid #CCCCCC;
   background: white;
-  color: #ccc;
+  color: #666;
 }
 .swiper-box .list .but-box button.confirm{
   background: #FFC53B;
