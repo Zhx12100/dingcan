@@ -35,7 +35,7 @@ export function getOrganizationDetail(data) {
 // 删除组织图
 export function changeOrganization(data) {
   return request({
-    url: '/admin/meal/delete_organize',
+    url: '/admin/meal/operate_organize',
     method: 'post',
     data
   })

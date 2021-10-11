@@ -39,11 +39,11 @@
           {{ scope.row.real_name }}
         </template>
       </el-table-column>
-      <el-table-column align="center" label="角色">
+      <!-- <el-table-column align="center" label="角色">
         <template slot-scope="scope">
           {{ scope.row.role }}
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column align="center" label="组织ID">
         <template slot-scope="scope">
           {{ scope.row.organize_id }}
@@ -102,7 +102,7 @@ export default {
         page_len: 10,
         nick_name: "",
         freeze_flag: "",
-        role: "",
+        // role: "",
       },
       pageSize: 10,
       total: 0,
