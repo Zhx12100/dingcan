@@ -23,6 +23,8 @@
           {{ scope.row.ID }}
         </template>
       </el-table-column> -->
+      <el-table-column label="序号" type="index" align="center" width="55">
+      </el-table-column>
       <el-table-column align="center" label="openid">
         <template slot-scope="scope">
           {{ scope.row.openid }}
@@ -37,11 +39,6 @@
       <el-table-column align="center" label="姓名">
         <template slot-scope="scope">
           {{ scope.row.real_name }}
-        </template>
-      </el-table-column>
-      <el-table-column align="center" label="角色">
-        <template slot-scope="scope">
-          {{ scope.row.role }}
         </template>
       </el-table-column>
       <el-table-column align="center" label="组织ID">

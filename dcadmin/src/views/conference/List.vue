@@ -16,10 +16,7 @@
       <el-button size="medium" @click="goAddEdit()" icon="el-icon-plus">新增</el-button>
     </el-form>
     <el-table v-loading="listLoading" :data="list" element-loading-text="Loading">
-      <el-table-column label="ID" align="center" width="55">
-        <template slot-scope="scope">
-          {{ scope.row.room_id }}
-        </template>
+      <el-table-column label="序号" type="index" align="center" width="55">
       </el-table-column>
       <el-table-column label="房间号" align="center">
         <template slot-scope="scope">
@@ -408,7 +405,7 @@ export default {
     width: 130px;
   }
   ::v-deep .el-form-item__content{
-        width: 229px;
+    width: 229px;
   }
 }
 .pagination-box {
