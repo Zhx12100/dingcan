@@ -30,7 +30,7 @@ App({
                 wx.redirectTo({
                   url: '/pages/status/status',
                 })
-                return false
+                // return false
               } else { //如果未冻结
                 
                 if(!res.data.data.user_info.nick_name){//如果登陆过但未绑定信息
@@ -41,7 +41,7 @@ App({
                   // return false
                 }
                 that.globalData.token = res.data.data.token
-                if(res.data.data.role==0){//未绑定角色
+                if(res.data.data.organize_id==''){//未绑定角色
                   // wx.redirectTo({
                   //   url: '/pages/login/index',
                   // })

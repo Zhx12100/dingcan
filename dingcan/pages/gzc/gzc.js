@@ -75,6 +75,8 @@ Page({
       max_name:'',
       max_position:'',
       settle_part:'',
+      pay_name:'',
+      pay_phone:'',
       dining_count:'',
       other_count:'',
       meal_way:'',
@@ -197,6 +199,16 @@ Page({
       ['formData.settle_part']: e.detail.value
     })
   },
+  bindPayName: function (e) {
+    this.setData({
+      ['formData.pay_name']: e.detail.value
+    })
+  },
+  bindPayPhone: function (e) {
+    this.setData({
+      ['formData.pay_phone']: e.detail.value
+    })
+  },
   bindDiningCount: function (e) {
     this.setData({
       ['formData.dining_count']: e.detail.value*1
@@ -236,7 +248,7 @@ Page({
     let data = that.data.formData
     // data.meet_id = that.data.id
     for(let key in data){
-      if(data[key]==''&&key!='brand_note'&&key!='meal_note'&&key!='order_id'){
+      if(data[key]==''&&key!='brand_note'&&key!='meal_note'&&key!='order_id'&&key!='extra_file'){
         wx.showToast({
           title: '请填写完整信息',
           icon: 'error',

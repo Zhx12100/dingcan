@@ -10,7 +10,7 @@ Page({
     id: '',
     startTime:'',
     meal_time:[
-      {meal:'午餐',meal_id:2},
+      // {meal:'午餐',meal_id:2},
       {meal:'晚餐',meal_id:3},
     ],
     detail: {
@@ -26,7 +26,9 @@ Page({
       reserve_date:'',
       meal_time:'',
       meal_note: '',
-      dining_count:'',
+      // dining_count:'',
+      leader_count:'',
+      worker_count:'',
     },
     extra_file_name: '',
     id: '',
@@ -101,9 +103,14 @@ Page({
       ['formData.phone']: e.detail.value
     })
   },
-  bindDiningCount: function (e) {
+  bindLeaderCount: function (e) {
     this.setData({
-      ['formData.dining_count']: e.detail.value*1
+      ['formData.leader_count']: e.detail.value*1
+    })
+  },
+  bindWorkerCount: function (e) {
+    this.setData({
+      ['formData.worker_count']: e.detail.value*1
     })
   },
   bindStartTimeChange: function (e) {

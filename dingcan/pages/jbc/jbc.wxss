@@ -605,7 +605,7 @@ page {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: start;
 }
 .repast-box .mealTime{
   justify-content: space-around;

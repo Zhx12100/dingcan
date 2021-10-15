@@ -25,3 +25,11 @@
     <view class="text2">（节假日）</view>
   </view>
 </view>
+<view class="notice">
+  <view class="title">
+    <view class="img-box">
+      <!-- <image src="/images/gonggao"></image> -->
+    </view>
+    <!-- <view class="text">关于食堂10月13号不能正常供应饭菜 通知</view> -->
+  </view>
+</view>

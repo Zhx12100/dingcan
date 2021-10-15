@@ -90,13 +90,26 @@
       <view class="inp-box">
         <view class="ico">
           <view class="title">
-            用餐人数：
+            区领导用餐人数：
           </view>
         </view>
         <view class="right">
           <view class="tips">
-            <input type="text" class="inputs" value="{{formData.dining_count}}" bindinput="bindDiningCount"
-              placeholder-style="color:#ccc;" placeholder="请填写用餐人数" />
+            <input type="text" class="inputs" value="{{formData.leader_count}}" bindinput="bindLeaderCount"
+              placeholder-style="color:#ccc;" placeholder="请填写区领导用餐人数" />
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            工作人员用餐人数：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <input type="text" class="inputs" value="{{formData.worker_count}}" bindinput="bindWorkerCount"
+              placeholder-style="color:#ccc;" placeholder="请填写 工作人员用餐人数" />
           </view>
         </view>
       </view>

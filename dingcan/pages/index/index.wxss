@@ -50,3 +50,9 @@ page{
   font-weight: 400;
   color: #666666;
 }
+
+.notice{
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  margin-top: 20rpx;
+}
