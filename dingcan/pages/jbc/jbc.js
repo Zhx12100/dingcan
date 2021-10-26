@@ -138,7 +138,8 @@ Page({
     let data = that.data.formData
     // data.meet_id = that.data.id
     for(let key in data){
-      if(data[key]==''&&key!='meal_note'&&key!='order_id'){
+      console.log(key,data[key])
+      if(data[key]===''&&key!='meal_note'&&key!='order_id'){
         wx.showToast({
           title: '请填写完整信息',
           icon: 'error',

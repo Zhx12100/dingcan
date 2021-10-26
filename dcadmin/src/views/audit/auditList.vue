@@ -168,12 +168,16 @@
         <el-form-item label="订餐联系电话：">
           {{ detail.phone }}
         </el-form-item>
-        <el-form-item label="用餐房间：" v-if="detail.meal_type=='二楼工作餐'">
+        <el-form-item label="订餐房间：" v-if="detail.meal_type=='二楼工作餐'">
           {{ detail.work.room_no }}
         </el-form-item>
-        <el-form-item label="用餐人数：">
-            {{ detail.dining_count }}
-          </el-form-item>
+        <el-form-item label="区领导用餐人数：" v-if="detail.meal_type!='二楼工作餐'">
+          {{ detail.leader_count }}
+        </el-form-item>
+        <el-form-item label="工作人员用餐人数：">
+          {{ detail.worker_count }}
+        </el-form-item>
+        
         <el-form-item label="订餐日期：">
           {{ detail.reserve_date }}
         </el-form-item>
@@ -189,6 +193,15 @@
           </el-form-item>
           <el-form-item label="结算单位：">
             {{ detail.work.settle_part }}
+          </el-form-item>
+          <el-form-item label="结算单位联系人：">
+            {{ detail.work.pay_name }}
+          </el-form-item>
+          <el-form-item label="联系方式：">
+            {{ detail.work.pay_phone }}
+          </el-form-item>
+          <el-form-item label="用餐人数：">
+            {{ detail.dining_count }}
           </el-form-item>
           <el-form-item label="司陪人数：">
             {{ detail.work.other_count }}

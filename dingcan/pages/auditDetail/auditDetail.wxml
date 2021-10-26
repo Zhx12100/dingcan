@@ -86,16 +86,30 @@
           </view>
         </view>
       </view>
-      <view class="inp-box">
+      <view class="inp-box" wx:if="{{detail.meal_type==2}}">
         <view class="ico">
           <view class="title">
-            用餐人数：
+            区领导用餐人数：
           </view>
         </view>
         <view class="right">
           <view class="tips">
             <view class="input">
-              {{detail.dining_count}}
+              {{detail.leader_count}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box"  wx:if="{{detail.meal_type==2}}">
+        <view class="ico">
+          <view class="title">
+            工作人员用餐人数：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">
+              {{detail.worker_count}}
             </view>
           </view>
         </view>
@@ -160,6 +174,42 @@
         <view class="right">
           <view class="tips">
             <view class="input">{{detail.work.settle_part}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            结算单位联系人：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">{{detail.work.pay_name}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            结算单位联系方式：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">{{detail.work.pay_phone}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            用餐人数：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">{{detail.dining_count}}</view>
           </view>
         </view>
       </view>
