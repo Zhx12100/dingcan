@@ -1,17 +1,19 @@
 {
   "pages":[
     "pages/status/status",
-    "pages/index/index",
     "pages/login/index",
     "pages/feedBack/feedBack",
     "pages/feedBackResult/feedBackResult",
     "pages/logs/logs",
-    "pages/auditDetail/auditDetail",
-    "pages/auditBill/auditBill",
+  
+    "pages/bindingInfo/bindingInfo",
+
+    "pages/User/index/index",
+    "pages/User/auditDetail/auditDetail",
+    "pages/User/auditBill/auditBill",
+    "pages/User/gzc/gzc",
+    "pages/User/jbc/jbc",
     
-    "pages/dbindingInfo/bindingInfo",
-    "pages/gzc/gzc",
-    "pages/jbc/jbc",
     "pages/my/my"
   ],
   "window":{

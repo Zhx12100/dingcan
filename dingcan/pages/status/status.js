@@ -32,7 +32,7 @@ Page({
           wx.hideToast()
         }else{
           console.log('app.globalData.userInf',app.globalData.userInfo)
-          if(app.globalData.userInfo.organize_id==''){//未绑定角色
+          if(app.globalData.userInfo.role==0){//未绑定角色
             if(app.globalData.userInfo.nick_name==''){
               wx.reLaunch({
                 url: '/pages/login/index',
@@ -43,8 +43,8 @@ Page({
               })
             }
           }else{//已绑定角色
-            wx.switchTab({
-              url: '/pages/index/index',
+            wx.reLaunch({
+              url: '/pages/index/index?type==?type='+(app.globalData.userInfo.role==1?2:1),
             })
           }
           console.log(2)

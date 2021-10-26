@@ -4,11 +4,20 @@
       <el-form-item label="组织ID">
         <el-input v-model="formData.organize_id" type="text" />
       </el-form-item>
+      <el-form-item label="组织密码">
+        <el-input v-model="formData.password" type="password" />
+      </el-form-item>
       <el-form-item label="组织部门">
         <el-input v-model="formData.organize_part" type="text" />
       </el-form-item>
       <el-form-item label="分配人数">
         <el-input v-model="formData.people_count" type="number" />
+      </el-form-item>
+      <el-form-item label="角色">
+        <el-select v-model="formData.role" placeholder="">
+          <el-option label="使用者" :value="1" />
+          <el-option label="管理者" :value="2" />
+        </el-select>
       </el-form-item>
       <el-form-item label="状态">
         <el-select v-model="formData.status" placeholder="">
@@ -36,7 +45,9 @@ export default {
         organize_id: "",
         organize_part: "",
         status: "",
-        people_count:""
+        people_count:"",
+        role:"",
+        password:""
       },
       buttonLoading: false,
     };
@@ -68,6 +79,15 @@ export default {
           type: 'warning',
         });
         return false
+      }
+      for(var key in data){
+        if(data[key]==''){
+          that.$message({
+            message: '请填写完整信息',
+            type: 'warning',
+          });
+          return false
+        }
       }
       that.buttonLoading = true;
       setOrganization(data)

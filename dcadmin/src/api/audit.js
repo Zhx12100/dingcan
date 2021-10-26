@@ -44,3 +44,38 @@ export function exportAudit(data) {
   })
 }
 
+//获取节假日加班餐
+export function getAuditOt(data) {
+  return request({
+    url: '/system/get_ot',
+    method: 'post',
+    data
+  })
+}
+
+//设置节假日加班餐
+export function setAuditOt(data) {
+  return request({
+    url: '/system/set_ot',
+    method: 'post',
+    data
+  })
+}
+
+//获取公告
+export function getAuditNotice(data) {
+  return request({
+    url: '/system/get_notice',
+    method: 'post',
+    data
+  })
+}
+
+//设置公告
+export function setAuditNotice(data) {
+  return request({
+    url: '/system/save_notice',
+    method: 'post',
+    data
+  })
+}

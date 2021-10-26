@@ -10,6 +10,7 @@
       <el-form-item label="组织ID">
         <el-input v-model="formScreen.organize_id" />
       </el-form-item>
+      
       <el-form-item label="组织部门">
         <el-input v-model="formScreen.organize_part" />
       </el-form-item>
@@ -46,6 +47,11 @@
       <el-table-column label="组织部门" align="center">
         <template slot-scope="scope">
           {{ scope.row.organize_part }} 
+        </template>
+      </el-table-column>
+      <el-table-column label="角色" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.role }} 
         </template>
       </el-table-column>
       <el-table-column label="分配人数" align="center">
