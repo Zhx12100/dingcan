@@ -1,52 +1,68 @@
 // pages/my/my.js
 const app = getApp()
-Page({
+Component({
 
   /**
    * 页面的初始数据
    */
   data: {
-    detail: {}
+    detail: {},
+    role:0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    this.getDetail()
+  lifetimes: {
+    // console.log('kpl')
+    attached: function () {
+      this.getDetail()
+      console.log('attached',app.globalData.userInfo.role)
+      this.setData({
+        role:app.globalData.userInfo.role
+      })
+    },
+    moved: function () {
+      console.log('moved')
+    },
+    detached: function () {
+      console.log('detached')
+    },
   },
 
-
-
-  getDetail() {
-    let that = this
-    wx.request({
-      url: app.globalData.baseUrl + '/applet/user/detail_info',
-      method: "post",
-      header: {
-        'token': app.globalData.token
-      },
-      data: {},
-      success: function (res) {
-        console.log('获取个人数据', res.data.data)
-        that.setData({
-          detail: res.data.data
-        })
-      }
-    })
+  methods:{
+    getDetail() {
+      let that = this
+      let url = ''
+      wx.request({
+        url: app.globalData.baseUrl + '/applet/user/detail_info',
+        method: "post",
+        header: {
+          'token': app.globalData.token
+        },
+        data: {},
+        success: function (res) {
+          console.log('获取个人数据', res.data.data)
+          that.setData({
+            detail: res.data.data
+          })
+        }
+      })
+    },
+    //跳转反馈页面
+    goFeedBack(event) {
+      wx.navigateTo({
+        url: `/pages/feedBack/feedBack`
+      })
+    },
+    //跳转订餐列表
+    goAuditBill(event) {
+      wx.navigateTo({
+        url: `/pages/User/auditBill/auditBill`
+      })
+    },
   },
-  //跳转估价页面
-  goFeedBack(event) {
-    wx.navigateTo({
-      url: `/pages/feedBack/feedBack`
-    })
-  },
-  //跳转估价页面
-  goAuditBill(event) {
-    wx.navigateTo({
-      url: `/pages/auditBill/auditBill`
-    })
-  },
+  
 
 
   // call: function () {

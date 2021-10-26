@@ -11,7 +11,7 @@ Page({
 			pic_list: [],
 			note: '',
 		},
-		preview : [],
+		preview: [],
 	},
 
 	/**
@@ -33,7 +33,7 @@ Page({
 	},
 
 	//预览图片
-	goPreview(event){
+	goPreview(event) {
 		let that = this
 		//预览图片，放大预览
 		console.log(event.currentTarget.dataset.src)
@@ -45,13 +45,13 @@ Page({
 	},
 
 	//删除图片
-	delImg(event){
+	delImg(event) {
 		let that = this
 		let index = event.currentTarget.dataset.index
 		let pic_list = that.data.formData.pic_list
 		let preview = that.data.preview
-		pic_list.splice(index,1)
-		preview.splice(index,1)
+		pic_list.splice(index, 1)
+		preview.splice(index, 1)
 		that.setData({
 			['formData.pic_list']: pic_list,
 			preview: preview,
@@ -60,11 +60,11 @@ Page({
 
 	addImage() {
 		let that = this
-		if(that.data.formData.pic_list.length==5){
+		if (that.data.formData.pic_list.length == 5) {
 			wx.showToast({
-        title: '最多上传五张',
-        icon: 'error',
-        duration: 2000
+				title: '最多上传五张',
+				icon: 'error',
+				duration: 2000
 			});
 			return false
 		}
@@ -108,7 +108,7 @@ Page({
 							}
 							let pic_list = that.data.formData.pic_list
 							let preview = that.data.preview
-							if(pic_list.length==5){
+							if (pic_list.length == 5) {
 								return false
 							}
 							pic_list.push(data.data.file_path)
@@ -119,6 +119,7 @@ Page({
 							})
 						},
 						fail: function (res) {
+							console.log(res)
 							wx.hideToast();
 							wx.showModal({
 								title: '错误提示',
@@ -136,9 +137,17 @@ Page({
 	goSubmit() {
 		let that = this
 		let data = that.data.formData
-		if (data.phone == ''||data.note == '') {
+		if (data.phone == '' || data.note == '') {
 			wx.showToast({
 				title: '请填写完整信息',
+				icon: 'none',
+				duration: 1500
+			})
+			return false
+		}
+		if (!(/^1[3456789]\d{9}$/.test(data.phone))) {
+			wx.showToast({
+				title: '手机号码格式有误',
 				icon: 'none',
 				duration: 1500
 			})

@@ -1,17 +1,23 @@
 {
   "pages":[
     "pages/status/status",
-    "pages/index/index",
     "pages/login/index",
     "pages/feedBack/feedBack",
     "pages/feedBackResult/feedBackResult",
     "pages/logs/logs",
-    "pages/auditDetail/auditDetail",
-    "pages/auditBill/auditBill",
+  
+    "pages/bindingInfo/bindingInfo",
+
+    "pages/Administration/index/index",
+    "pages/Administration/auditDetail/auditDetail",
+
+    "pages/index/index",
+    "pages/User/auditDetail/auditDetail",
+    "pages/User/index/index",
+    "pages/User/auditBill/auditBill",
+    "pages/User/gzc/gzc",
+    "pages/User/jbc/jbc",
     
-    "pages/dbindingInfo/bindingInfo",
-    "pages/gzc/gzc",
-    "pages/jbc/jbc",
     "pages/my/my"
   ],
   "window":{
@@ -21,24 +27,5 @@
     "navigationBarTextStyle":"black"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json",
-  "tabBar": {
-    "color": "#999999",
-    "selectedColor": "#3377FF",
-    "borderStyle": "black",
-    "list": [
-      {
-        "selectedIconPath": "images/meishi.png",
-        "iconPath": "images/meishi1.png",
-        "pagePath": "pages/index/index",
-        "text": "订餐"
-      },
-      {
-        "selectedIconPath": "images/wode2.png",
-        "iconPath": "images/wode1.png",
-        "pagePath": "pages/my/my",
-        "text": "我的"
-      }
-    ]
-  }
+  "sitemapLocation": "sitemap.json"
 }

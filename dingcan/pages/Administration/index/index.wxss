@@ -1,0 +1,88 @@
+/**index.wxss**/
+page{
+    position: relative;
+}
+.hent{
+    height: 40rpx;
+}
+.back-banner{
+    width: 100%;
+    height: 160rpx;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.back-banner image{
+    width: 100%;
+    height: 100%!important;
+}
+.box{
+    margin: 25rpx 24rpx 0;
+    padding: 0rpx 20rpx 0;
+    /* height: 980rpx; */
+    background: #FFFFFF;
+    border-radius: 20rpx;
+    position: relative;
+    z-index: 999;
+    overflow: hidden;
+}
+.box .title{
+    font-size: 32rpx;
+    font-family: NotoSansHans;
+    font-weight: bold;
+    color: #333333;
+    line-height: 1;
+    padding-left: 16rpx;
+    border-left: 6rpx solid #3377FF;
+    margin: 35rpx 0;
+}
+.box .search{
+    display: flex;
+    align-items: center;
+
+}
+.box .search .heng{
+    margin: 0 20rpx;
+}
+.box .search .date-box{
+    width: 260rpx;
+    height: 60rpx;
+    background: #FFFFFF;
+    border: 2rpx solid #E6E6E6;
+    border-radius: 6rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 30rpx;
+    font-family: Source Han Sans CN;
+    font-weight: 400;
+    color: #333333;
+}
+.box .search .date-box .img-box{
+    width: 32rpx;
+    height: 32rpx;
+}
+.box .search .date-box .img-box image{
+    width: 100%;
+    height: 100%!important;
+}
+.box .tubiao{
+    width: 100%;
+    /* height: 500px; */
+    position: relative;
+}
+.box .tubiao .containerCanvas {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+ec-canvas {
+    width: 100%;
+    height: 100%;
+}
+  

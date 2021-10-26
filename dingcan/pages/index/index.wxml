@@ -1,27 +1,28 @@
-<!--index.wxml-->
-<view class="banner">
-  <image src="/images/banner.png" mode="widthFix"></image>
+<view style='margin-bottom:130rpx;'>
+<!-- 组件显示，根据自己需求添加 -->
+<!-- 管理员端首页 -->
+  <view wx:if="{{(currentTab == 0&&type == 1) ? true : false}}">
+    <administration_index/>
+  </view>
+  <view wx:if="{{(currentTab == 1&&type == 1) ? true : false}}">
+    <administration_auditBill/>
+  </view>
+  <view wx:if="{{((currentTab == 2&&type == 1)||(currentTab == 1&&type == 2)) ? true : false}}">
+    <my/>
+  </view>
+  <view style="padding: 20rpx 20rpx 0;" wx:if="{{(currentTab == 0&&type == 2) ? true : false}}">
+    <user_index/>
+  </view>
+  <!-- <view wx:if="{{(currentTab == 1&&type == 2) ? true : false}}">
+    <user_auditBill/>
+  </view> -->
 </view>
-<view class="type">
-  <view class="list" bindtap="goGzc">
-    <view class="img-box">
-      <image src="/images/gongzuocan@2x.png" mode="widthFix"></image>
-    </view>
-    <view class="text1">工作餐</view>
-    <view class="text2">二楼</view>
-  </view>
-  <view class="list" bindtap="goJbc" data-type="2">
-    <view class="img-box">
-      <image src="/images/gongzuori@2x.png" mode="widthFix"></image>
-    </view>
-    <view class="text1">加班餐</view>
-    <view class="text2">（工作日）</view>
-  </view>
-  <view class="list" bindtap="goJbc" data-type="3">
-    <view class="img-box">
-      <image src="/images/jiejiari@2x.png" mode="widthFix"></image>
-    </view>
-    <view class="text1">加班餐</view>
-    <view class="text2">（节假日）</view>
+
+<!-- 自定义 tabbar -->
+<view class="nav-tabs">
+  <view class="tab-list {{currentTab == idx ? 'active' : 'default' }}" wx:for="{{items}}" wx:key="prototype" wx:for-index="idx" wx:for-item="item" data-current="{{idx}}" bindtap="swichNav">
+    <text class="tab-text" wx:for-index="idx" data-current="{{idx}}" src="{{currentTab == idx ? item.selectedIconPath : item.iconPath }}">{{item.text}}</text>
+    <image class="iconPath" wx:for-index="idx" data-current="{{idx}}" src="{{currentTab == idx ? item.selectedIconPath : item.iconPath }}"></image>
   </view>
 </view>
+

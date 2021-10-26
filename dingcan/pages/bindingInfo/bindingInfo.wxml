@@ -2,7 +2,7 @@
   <view class="logo-box">
     <image src="/images/blueBack.png"></image>
     <view class="cont">
-      <image src="/images/logo@2x.png.png"></image>
+      <image src="/images/logo@2x.png"></image>
       <view class="text">订餐服务平台</view>
     </view>
   </view>
@@ -18,6 +18,16 @@
         <view class="right">
           <view class="tips">
             <input type="text" class="inputs" bindinput="bindID" placeholder-style="color:#ccc;" placeholder="请输入组织机构ID" />
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">组织密码</view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <input type="password" class="inputs" bindinput="bindPassword" placeholder-style="color:#ccc;" placeholder="请输入组织密码" />
           </view>
         </view>
       </view>

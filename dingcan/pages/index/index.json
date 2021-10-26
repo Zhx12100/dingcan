@@ -1,6 +1,12 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "订餐",
+  "usingComponents": {
+    "administration_index": "/pages/Administration/index/index",
+    "administration_auditBill": "/pages/Administration/auditBill/auditBill",
+    "my": "/pages/my/my",
+    "user_index": "/pages/User/index/index",
+    "user_auditBill": "/pages/User/auditBill/auditBill"
+  },
+  "navigationBarTitleText": "",
   "navigationBarBackgroundColor": "#3b7dff",
   "navigationBarTextStyle": "white"
 }

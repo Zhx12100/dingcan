@@ -9,15 +9,7 @@
         <el-input type="number" v-model="formScreen.phone" />
       </el-form-item>
       <el-form-item label="订餐日期">
-        <el-date-picker
-          v-model="formScreendate"
-          type="daterange"
-          format="yyyy-MM-dd"
-          value-format="yyyy-MM-dd"
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        >
+        <el-date-picker v-model="formScreendate" type="daterange" format="yyyy-MM-dd" value-format="yyyy-MM-dd" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="订餐联系人">
@@ -41,25 +33,17 @@
           <el-option label="节假日加班餐" :value="3" />
         </el-select>
       </el-form-item>
-      <el-button
-        type="primary"
-        :loading="listLoading"
-        @click="getList"
-        size="medium"
-        >查询</el-button
-      >
+      <el-button type="primary" :loading="listLoading" @click="getList" size="medium">查询</el-button>
       <el-button type="" @click="allExport" size="medium">导出</el-button>
     </el-form>
-    <el-table
-      v-loading="listLoading"
-      :data="list"
-      ref="multipleTable"
-      element-loading-text="Loading"
-    >
-      <el-table-column label="ID" align="center" width="55">
-        <template slot-scope="scope">
-          {{ scope.row.order_id }}
-        </template>
+    <el-form class="caozuo-box">
+      <el-form-item label="小程序加班餐（节假日）">
+        <el-switch v-model="get_ot" active-text="启用" @change="setOt"> </el-switch>
+      </el-form-item>
+      <el-button size="medium" @click="openNotice">公告设置</el-button>
+    </el-form>
+    <el-table v-loading="listLoading" :data="list" ref="multipleTable" element-loading-text="Loading">
+      <el-table-column label="序号" type="index" align="center" width="55">
       </el-table-column>
       <el-table-column label="用户名称" align="center">
         <template slot-scope="scope">
@@ -119,12 +103,8 @@
       </el-table-column>
       <el-table-column class-name="status-col" label="操作" align="center">
         <template slot-scope="scope">
-          <el-tag
-            type="success"
-            size="small"
-            @click="getDetail(scope.row.order_id)"
-            >查看详情</el-tag
-          >
+          <el-tag type="warning" v-if="scope.row.audit_status=='审核中'" size="small" @click="kjcz(scope.row.order_id)">审核</el-tag>
+          <el-tag type="success" size="small" @click="getDetail(scope.row.order_id)">查看详情</el-tag>
           <!-- <el-tag
             type="warning"
             v-if="scope.row.status == '待支付' || scope.row.status == '待运输'"
@@ -147,23 +127,9 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
-      class="pagination-box"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page="formScreen.page"
-      :page-sizes="[5, 10, 20, 50, 100]"
-      :page-size="formScreen.page_len"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="total"
-    >
+    <el-pagination class="pagination-box" @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="formScreen.page" :page-sizes="[5, 10, 20, 50, 100]" :page-size="formScreen.page_len" layout="total, sizes, prev, pager, next, jumper" :total="total">
     </el-pagination>
-    <el-dialog
-      title="订餐详情"
-      class="detail-box"
-      :visible.sync="dialogVisibleDetail"
-      width="600px"
-    >
+    <el-dialog title="订餐详情" class="detail-box" :visible.sync="dialogVisibleDetail" width="600px">
       <el-form ref="form" label-width="140px">
         <el-form-item label="订餐联系人：">
           {{ detail.name }}
@@ -171,12 +137,16 @@
         <el-form-item label="订餐联系电话：">
           {{ detail.phone }}
         </el-form-item>
-        <el-form-item label="用餐房间：">
-          {{ detail.reserve_date }}
+        <el-form-item label="订餐房间：" v-if="detail.meal_type=='二楼工作餐'">
+          {{ detail.work.room_no }}
         </el-form-item>
-        <el-form-item label="用餐人数：">
-            {{ detail.dining_count }}
-          </el-form-item>
+        <el-form-item label="区领导用餐人数：" v-if="detail.meal_type!='二楼工作餐'">
+          {{ detail.leader_count }}
+        </el-form-item>
+        <el-form-item label="工作人员用餐人数：">
+          {{ detail.worker_count }}
+        </el-form-item>
+
         <el-form-item label="订餐日期：">
           {{ detail.reserve_date }}
         </el-form-item>
@@ -193,6 +163,15 @@
           <el-form-item label="结算单位：">
             {{ detail.work.settle_part }}
           </el-form-item>
+          <el-form-item label="结算单位联系人：">
+            {{ detail.work.pay_name }}
+          </el-form-item>
+          <el-form-item label="联系方式：">
+            {{ detail.work.pay_phone }}
+          </el-form-item>
+          <el-form-item label="用餐人数：">
+            {{ detail.dining_count }}
+          </el-form-item>
           <el-form-item label="司陪人数：">
             {{ detail.work.other_count }}
           </el-form-item>
@@ -203,14 +182,7 @@
             {{ detail.work.meal_property }}
           </el-form-item>
           <el-form-item label="接待函附件：">
-            <a
-              :href="baseURL + detail.work.extra_file"
-              target="_blank"
-              download=""
-              rel="noopener noreferrer"
-              style="color: #67c23a"
-              >{{ detail.work.extra_file }}</a
-            >
+            <a :href="baseURL + detail.work.extra_file" target="_blank" download="" rel="noopener noreferrer" style="color: #67c23a">{{ detail.work.extra_file }}</a>
           </el-form-item>
           <el-form-item label="水牌备注：">
             {{ detail.work.brand_note }}
@@ -244,17 +216,23 @@
           {{ detail.audit_man }}
         </el-form-item>
       </el-form>
-      <span
-        slot="footer"
-        class="dialog-footer"
-        v-if="detail.audit_status == '审核中'"
-      >
-        <el-button type="warning" size="medium" @click="setDriver(false)"
-          >不通过</el-button
-        >
-        <el-button size="medium" type="primary" @click="setDriver(true)"
-          >审核通过</el-button
-        >
+      <span slot="footer" class="dialog-footer" v-if="detail.audit_status == '审核中'">
+        <el-button type="warning" size="medium" @click="setDriver(false)">不通过</el-button>
+        <el-button size="medium" type="primary" @click="setDriver(true)">审核通过</el-button>
+      </span>
+    </el-dialog>
+    <el-dialog title="编辑公告" class="notice-box" :visible.sync="dialogVisibleNotice" width="600px">
+      <el-form ref="form2" :inline="false" label-width="auto" size="medium">
+        <el-form-item label="标题">
+          <el-input v-model="notice.title" />
+        </el-form-item>
+        <el-form-item label="内容">
+          <el-input type="textarea" v-model="notice.notice" />
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="warning" size="medium" @click="dialogVisibleNotice = false">取消</el-button>
+        <el-button size="medium" type="primary" @click="setNotice()">确定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -268,6 +246,10 @@ import {
   setAuditDriver,
   cancelAudit,
   exportAudit,
+  getAuditOt,
+  setAuditOt,
+  getAuditNotice,
+  setAuditNotice,
 } from "@/api/audit";
 export default {
   name: "AuditList",
@@ -278,6 +260,12 @@ export default {
       baseURL: process.env.VUE_APP_BASE_API,
       dialogVisibleDetail: false,
       dialogVisibleEditAdd: false,
+      get_ot: false, //假日加班餐是否展示
+      notice: {
+        title: "",
+        notice: "",
+      },
+      dialogVisibleNotice: false,
       formScreen: {
         organize_id: "",
         phone: "",
@@ -293,21 +281,23 @@ export default {
       formScreendate: ["", ""],
       pageSize: 10,
       total: 0,
-      detail: {work:{}},
+      detail: { work: {} },
       order_id: "",
     };
   },
   created() {
     this.getList();
+    this.getOt();
+    this.getNotice();
   },
   methods: {
     getList() {
       var that = this;
       that.listLoading = true;
-      console.log(that.formScreendate)
+      console.log(that.formScreendate);
       let data = that.formScreen;
-      if(that.formScreendate==null){
-        that.formScreendate = ["", ""]
+      if (that.formScreendate == null) {
+        that.formScreendate = ["", ""];
       }
       data.start_time = that.formScreendate[0];
       data.end_time = that.formScreendate[1];
@@ -329,6 +319,83 @@ export default {
         that.detail = response.data;
       });
     },
+    //节假日加班餐是否展示
+    getOt(id) {
+      var that = this;
+      console.log(id);
+      getAuditOt({}).then((response) => {
+        console.log("获取节假日加班餐是否展示", response);
+        // that.dialogVisibleDetail = false;
+        that.get_ot = response.data.ot_holiday_flag;
+      });
+    },
+    //设置节假日加班餐是否展示
+    setOt(id) {
+      var that = this;
+      console.log(id);
+      setAuditOt({ ot_holiday_flag: that.get_ot }).then((response) => {
+        console.log("设置节假日加班餐是否展示", response);
+        that.$message({
+          message: "保存成功",
+          type: "success",
+        });
+        // that.get_ot = response.data;
+      });
+    },
+    //获取公告
+    getNotice(id) {
+      var that = this;
+      console.log(id);
+      getAuditNotice({}).then((response) => {
+        console.log("获取公告", response);
+        // that.dialogVisibleDetail = false;
+        that.notice = response.data;
+      });
+    },
+    //设置公告
+    setNotice(notice) {
+      var that = this;
+      var data = that.notice;
+      setAuditNotice(data).then((response) => {
+        console.log("公告", response);
+        that.$message({
+          message: "保存成功",
+          type: "success",
+        });
+        that.dialogVisibleNotice = false;
+      });
+    },
+    //打开公告
+    openNotice() {
+      let that = this;
+      that.getNotice();
+      that.dialogVisibleNotice = true;
+    },
+    //快速审核
+    kjcz(id) {
+      let that = this;
+      that.order_id = id;
+      that
+        .$confirm("请选择审核操作", "确认信息", {
+          distinguishCancelAndClose: true,
+          confirmButtonText: "审核通过",
+          cancelButtonText: "不通过",
+          type: "warning",
+          center: true,
+        })
+        .then(() => {
+          that.setDriver(true);
+        })
+        .catch((action) => {
+          if (action == "cancel") {
+            //不通过
+            that.setDriver(false);
+          } else {
+            console.log(action);
+          }
+        });
+    },
+    
     // openDriver(type, order_id) {
     //   let that = this;
     //   that.driverId = order_id;
@@ -379,7 +446,7 @@ export default {
       };
       if (status == false) {
         that
-          .$prompt("请输入理由", "提示", {
+          .$prompt("请输入审核不通过的理由", "提示", {
             confirmButtonText: "确定",
             cancelButtonText: "取消",
           })
@@ -392,7 +459,7 @@ export default {
                   type: "success",
                   message: "修改审核状态成功!",
                 });
-                that.dialogVisibleDetail = true;
+                that.dialogVisibleDetail = false;
                 that.getList();
               }
             });
@@ -465,6 +532,16 @@ export default {
     line-height: 46px;
   }
   .pagination-box {
+  }
+  .caozuo-box {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .el-form-item {
+      width: 500px;
+      margin-bottom: 0;
+    }
   }
 }
 .detail-box {

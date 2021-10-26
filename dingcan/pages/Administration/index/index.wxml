@@ -1,0 +1,32 @@
+<!--index.wxml-->
+<view class="hent"></view>
+<view class="back-banner">
+	<image src="/images/back2.png" mode="widthFix"></image>
+</view>
+<view class="box">
+	<view class="title">工作餐单位统计</view>
+	<view class="search">
+		<picker mode="date" value="{{formData1.start_date}}" bindchange="bindDateChangeStart1">
+			<view class="picker date-box">
+				{{formData1.start_date}}
+					<view class="img-box">
+						<image src="/images/date.png" mode="widthFix"></image>
+					</view>
+			</view>
+		</picker>
+		<view class="heng">至</view>
+		<picker mode="date" value="{{formData1.end_date}}" bindchange="bindDateChangeStart1">
+			<view class="picker date-box">
+				{{formData1.end_date}}
+					<view class="img-box">
+						<image src="/images/date.png" mode="widthFix"></image>
+					</view>
+			</view>
+		</picker>
+	</view>
+	<view class="tubiao" style="height:{{form1Height+'0x'}}">
+		<view class="containerCanvas">
+			<ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}"></ec-canvas>
+		</view>
+	</view>
+</view>

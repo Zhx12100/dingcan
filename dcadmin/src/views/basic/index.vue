@@ -4,7 +4,7 @@
       <el-row :gutter="10" class="number-box">
         <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
           <div class="grid-content bg-purple">
-            <div class="title">当日加班人数</div>
+            <div class="title">当日加班餐订餐人数</div>
             <div class="count">{{ data.ot.today_count || 0 }}</div>
             <div class="yestday">
               对比昨日新增人数:{{ data.ot.diff_count || 0 }}
@@ -13,7 +13,7 @@
         </el-col>
         <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
           <div class="grid-content bg-purple-light">
-            <div class="title">当日二楼工作餐人数</div>
+            <div class="title">当日工作餐订餐人数</div>
             <div class="count">{{ data.work.today_count || 0 }}</div>
             <div class="yestday">
               对比昨日新增人数:{{ data.work.diff_count || 0 }}
@@ -212,6 +212,9 @@ export default {
       
       // 绘制图表
       myChart.setOption({
+        tooltip: {
+          trigger: "item",
+        },
         xAxis: {
           type: "category",
           data: dateArr,

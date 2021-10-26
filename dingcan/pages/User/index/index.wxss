@@ -1,0 +1,122 @@
+/**index.wxss**/
+page{
+  background-color: #F3F5FA;
+ 
+  width: 100%;
+  box-sizing: border-box;
+}
+.boxs{
+  margin: 30rpx 24rpx 0;
+}
+.banner {
+  margin-bottom: 28rpx;
+  /* width: 100%; */
+  border-radius: 20rpx;
+  overflow: hidden;
+  font-size: 0;
+}
+.banner image{
+  width: 100%;
+}
+.type{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.type .list{
+  width: 220rpx;
+  height: 300rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  text-align: center;
+  /* margin-right: 15rpx; */
+}
+.type .list:last-child{
+  margin-right: 0;
+}
+.type .list .img-box{
+  width: 156rpx;
+  display: inline-block;
+  font-size: 0;
+  margin-bottom: 36rpx;
+  margin-top: 40rpx;
+}
+.type .list .img-box image{
+  width: 100%;
+}
+.type .list .text1{
+  font-size: 30rpx;
+  font-family: SourceHanSansCN;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 15rpx;
+}
+.type .list .text2{
+  font-size: 28rpx;
+  font-family: SourceHanSansCN;
+  font-weight: 400;
+  color: #666666;
+}
+
+.notice{
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  margin-top: 28rpx;
+  padding: 20rpx 25rpx;
+  
+}
+.notice .title{
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 20rpx;
+}
+.notice .title .text{
+  font-size: 32rpx;
+  color: #333;
+  font-weight: bold;
+  line-height: 1.6;
+}
+.notice .title .img-box{
+  width: 32rpx;
+  height: 32rpx;
+  flex-shrink: 0;
+  margin-right: 10rpx;
+  margin-top: 3px;
+  /* font-size: 0; */
+}
+.notice .title .img-box image{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.notice > .text{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 30rpx;
+}
+.notice > .text > .text{
+  font-size: 26rpx;
+  color: #999;
+  
+}
+.notice .text .img-box{
+  width: 26rpx;
+  height: 26rpx;
+  margin-right: 10rpx;
+  flex-shrink: 0;
+  font-size: 0;
+}
+.notice .text .img-box image{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.notice .content{
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #666666;
+  line-height: 1.8;
+}

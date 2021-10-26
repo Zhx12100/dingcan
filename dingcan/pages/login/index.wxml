@@ -1,8 +1,8 @@
 <view wx:if="{{isHide}}">
   <view wx:if="{{canIUse}}">
     <view class='header'>
-      <image src='../../images/logo.jpg'></image>
-      <view>预订会议室小程序</view>
+      <image src='../../images/logo@2x.png'></image>
+      <view>订餐小程序</view>
     </view>
     <view class='content'>
       <text>请依次允许获得你的公开信息及手机号码</text>

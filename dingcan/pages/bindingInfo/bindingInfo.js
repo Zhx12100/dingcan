@@ -8,7 +8,8 @@ Page({
   data: {
     areaData: {
       real_name: '',
-      organize_id: ''
+      organize_id: '',
+      bindPassword:''
     }
 
   },
@@ -23,6 +24,12 @@ Page({
   bindID: function (e) {
     this.setData({
       ['areaData.organize_id']: e.detail.value
+    })
+  },
+  //组织ID
+  bindPassword: function (e) {
+    this.setData({
+      ['areaData.password']: e.detail.value
     })
   },
 
@@ -72,8 +79,8 @@ Page({
           return false
         }
         wx.hideToast()
-        wx.switchTab({
-          url: "../index/index"
+        wx.reLaunch({
+          url: "../index/index?type=" + (res.data.data.role == 1 ? 2 : 1)
         })
       }
     })

@@ -18,7 +18,7 @@
 </view>
 <view class="fu-margin">
   <view class="info-box">
-    <view class="inp-box" bindtap="goAuditBill"  data-type="end" data-origin="1">
+    <view class="inp-box" wx-if="{{role==1?true:false}}" bindtap="goAuditBill"  data-type="end" data-origin="1">
       <view class="ico">
         <view class="img-box">
           <image src="/images/jilu@2x.png"></image>

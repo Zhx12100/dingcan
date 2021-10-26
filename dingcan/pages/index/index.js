@@ -1,30 +1,103 @@
-// index.js
-// 获取应用实例
-const app = getApp()
+let app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    canIUseGetUserProfile: false,
-    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName') // 如需尝试获取用户信息可改为false
+    type:'',
+    currentTab: 0,
+    //这里只做tab名和显示图标
+    PageItems1: [
+      {
+        "text": "统计",
+        "iconPath": "/images/souye12x.png",
+        "selectedIconPath": "/images/souye22x.png"
+      },
+      {
+        "text": "审批",
+        "iconPath": "/images/shenpi12x.png",
+        "selectedIconPath": "/images/shenpi22x.png"
+      },
+      {
+        "text": "我的",
+        "iconPath": "/images/wode1.png",
+        "selectedIconPath": "/images/wode2.png"
+      }
+    ],
+    PageItems2: [
+      {
+        "text": "订餐",
+        "iconPath": "/images/meishi1.png",
+        "selectedIconPath": "/images/meishi.png"
+      },
+      {
+        "text": "我的",
+        "iconPath": "/images/wode1.png",
+        "selectedIconPath": "/images/wode2.png"
+      },
+    ],
+    items:[],
   },
-  goGzc(e) {
-    console.log(e)
+  swichNav: function (e) {
+    let that = this;
+    if (this.data.currentTab === e.target.dataset.current) {
+      return false;
+    } else {
+      that.setData({ 
+        currentTab: e.target.dataset.current
+      })
+      that.setNavigationBarTitles()
+    }
+  },
+  setNavigationBarTitles(){
     let that = this
-    wx.navigateTo({
-      url: `/pages/gzc/gzc`
-    })
+    console.log(that.data.type,that.data.currentTab)
+    if(that.data.type==1){
+      if(that.data.currentTab===0){
+        wx.setNavigationBarTitle({
+          title: '订餐统计'
+        })
+      }else if(that.data.currentTab===1){
+        wx.setNavigationBarTitle({
+          title: '订餐审批'
+        })
+      }else if(that.data.currentTab===2){
+        wx.setNavigationBarTitle({
+          title: '我的'
+        })
+      }
+    }else{
+      if(that.data.currentTab===0){
+        wx.setNavigationBarTitle({
+          title: '订餐'
+        })
+      }else if(that.data.currentTab===2){
+        wx.setNavigationBarTitle({
+          title: '我的'
+        })
+      }
+    }
   },
-  goJbc(e) {
-    console.log(e)
+  onShow:function(){
+    wx.hideHomeButton()
+  },
+  onLoad: function (options) {
     let that = this
-    wx.navigateTo({
-      url: `/pages/jbc/jbc?type=`+e.currentTarget.dataset.type
-    })
-  },
-  onLoad() {
-  },
+    console.log(options)
+    if(options.type){
+      that.setData({
+        type : options.type
+      })
+    }
+    if(that.data.type==1){
+      that.setData({
+        items:that.data.PageItems1
+      })
+    }else{
+      that.setData({
+        items:that.data.PageItems2
+      })
+    }
+    
+    console.log(that.data.type,that.data.items)
+    that.setNavigationBarTitles()
+  }
 })

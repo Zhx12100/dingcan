@@ -1,52 +1,74 @@
 /**index.wxss**/
-page{
-  background-color: #F3F5FA;
-  padding: 30rpx 24rpx 0;
-  width: 100%;
-  box-sizing: border-box;
+page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #F3F5FA;
+  overflow-y: scroll;
 }
-.banner {
-  margin-bottom: 28rpx;
+
+.nav-tabs {
   width: 100%;
-  border-radius: 20rpx;
-  overflow: hidden;
-  font-size: 0;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
-.banner image{
-  width: 100%;
-}
-.type{
+
+.tab-list {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  flex-direction: column-reverse;
+  background: white;
+  height: 100rpx;
+  padding-top: 6rpx;
 }
-.type .list{
-  width: 220rpx;
-  height: 300rpx;
-  background: #FFFFFF;
-  border-radius: 16rpx;
+
+.tab-text {
+  font-size: 24rpx;
+  line-height: 35rpx;
+  color: #9DA4B3;
+}
+.active .tab-text {
+  color: #3377FF;
+}
+
+.iconPath {
+  width:54rpx;
+  height: 54rpx;
+}
+
+.tab-content {
+  flex: 1;
+}
+
+.default {
+  line-height: 75rpx;
   text-align: center;
-}
-.type .list .img-box{
-  width: 156rpx;
-  display: inline-block;
-  font-size: 0;
-  margin-bottom: 36rpx;
-  margin-top: 40rpx;
-}
-.type .list .img-box image{
-  width: 100%;
-}
-.type .list .text1{
-  font-size: 30rpx;
-  font-family: SourceHanSansCN;
+  flex: 1;
+  /* border-bottom: 1px solid #eee; */
+  color: #eee;
   font-weight: bold;
-  color: #333333;
-  margin-bottom: 15rpx;
-}
-.type .list .text2{
   font-size: 28rpx;
-  font-family: SourceHanSansCN;
-  font-weight: 400;
-  color: #666666;
+}
+
+.active {
+  line-height: 75rpx;
+  text-align: center;
+  color: black;
+  flex: 1;
+  /* border-bottom: 1px solid red; */
+  font-weight: bold;
+  font-size: 28rpx;
+}
+
+.show {
+  display: block;
+  flex: 1;
+}
+
+.hidden {
+  display: none;
+  flex: 1;
 }

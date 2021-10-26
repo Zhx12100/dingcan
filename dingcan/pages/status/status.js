@@ -22,11 +22,14 @@ Page({
     that.data.setInter = setInterval(function () {
       console.log(app.globalData.freeze_flag)
       if(app.globalData.freeze_flag!==''){
+        console.log('ggggg',app.globalData.freeze_flag)
         if (app.globalData.freeze_flag == true) {
+          
           that.setData({
             isHide: true,
             phoneNumber:app.globalData.phoneNumber,
           })
+          wx.hideToast()
         }else{
           console.log('app.globalData.userInf',app.globalData.userInfo)
           if(app.globalData.userInfo.role==0){//未绑定角色
@@ -40,8 +43,9 @@ Page({
               })
             }
           }else{//已绑定角色
-            wx.switchTab({
-              url: '/pages/index/index',
+            console.log('已绑定角色',app.globalData.userInfo)
+            wx.reLaunch({
+              url: '/pages/index/index?type='+(app.globalData.userInfo.role==1?2:1),
             })
           }
           console.log(2)

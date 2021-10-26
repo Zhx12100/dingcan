@@ -23,6 +23,8 @@
           {{ scope.row.ID }}
         </template>
       </el-table-column> -->
+      <el-table-column label="序号" type="index" align="center" width="55">
+      </el-table-column>
       <el-table-column align="center" label="openid">
         <template slot-scope="scope">
           {{ scope.row.openid }}
@@ -39,11 +41,14 @@
           {{ scope.row.real_name }}
         </template>
       </el-table-column>
+<<<<<<< HEAD
       <!-- <el-table-column align="center" label="角色">
         <template slot-scope="scope">
           {{ scope.row.role }}
         </template>
       </el-table-column> -->
+=======
+>>>>>>> 597f74f8d780804990d9de33527fec71b4b04015
       <el-table-column align="center" label="组织ID">
         <template slot-scope="scope">
           {{ scope.row.organize_id }}
