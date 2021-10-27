@@ -15,7 +15,7 @@
 			</view>
 		</picker>
 		<view class="heng">至</view>
-		<picker mode="date" value="{{formData1.end_date}}" bindchange="bindDateChangeStart1">
+		<picker mode="date" value="{{formData1.end_date}}" bindchange="bindDateChangeEnd1">
 			<view class="picker date-box">
 				{{formData1.end_date}}
 					<view class="img-box">
@@ -27,7 +27,69 @@
 	<view class="tubiao" style="height:{{form1Height+'px'}}">
 		<view class="containerCanvas">
 			<ec-canvas id="mychart-dom-pie1" canvas-id="mychart-pie" ec="{{ ec1 }}"></ec-canvas>
+		<cover-view wx:if="{{isIOS}}" class="echart-mask" ></cover-view>
 		</view>
 	</view>
 </view>
+<view class="box">
+	<view class="title">加班餐 (工作日) 单位统计</view>
+	<view class="search">
+		<picker mode="date" value="{{formData2.start_date}}" bindchange="bindDateChangeStart2">
+			<view class="picker date-box">
+				{{formData2.start_date}}
+					<view class="img-box">
+						<image src="/images/date.png" mode="widthFix"></image>
+					</view>
+			</view>
+		</picker>
+		<view class="heng">至</view>
+		<picker mode="date" value="{{formData2.end_date}}" bindchange="bindDateChangeStart2">
+			<view class="picker date-box">
+				{{formData2.end_date}}
+					<view class="img-box">
+						<image src="/images/date.png" mode="widthFix"></image>
+					</view>
+			</view>
+		</picker>
+	</view>
+	<view class="tubiao" style="height:{{form2Height+'px'}}">
+		<view class="containerCanvas">
+			<ec-canvas id="mychart-dom-pie2" canvas-id="mychart-pie" ec="{{ ec2 }}"></ec-canvas>
+			<cover-view wx:if="{{isIOS}}" class="echart-mask" ></cover-view>
+		</view>
+	</view>
+</view>
+<view class="box">
+	<view class="title title2"><view class="v1">加班餐 (节假日) 单位统计</view> <view class="v2">预订功能 <switch checked="{{switch1Checked}}" bindchange="switch1Change"/></view></view>
+	<view class="search">
+		<picker mode="date" value="{{formData3.start_date}}" bindchange="bindDateChangeStart3">
+			<view class="picker date-box">
+				{{formData3.start_date}}
+					<view class="img-box">
+						<image src="/images/date.png" mode="widthFix"></image>
+					</view>
+			</view>
+		</picker>
+		<view class="heng">至</view>
+		<picker mode="date" value="{{formData3.end_date}}" bindchange="bindDateChangeStart3">
+			<view class="picker date-box">
+				{{formData3.end_date}}
+					<view class="img-box">
+						<image src="/images/date.png" mode="widthFix"></image>
+					</view>
+			</view>
+		</picker>
+	</view>
+	<view class="tubiao" style="height:{{form3Height+'px'}}">
+		<view class="containerCanvas">
+
+			<ec-canvas id="mychart-dom-pie3" canvas-id="mychart-pie" ec="{{ ec3 }}"></ec-canvas>
+		
+		<cover-view wx:if="{{isIOS}}" class="echart-mask" ></cover-view>
+		</view>
+	</view>
+</view>
+<view class="hent"></view>
+<view class="hent"></view>
+<view class="hent"></view>
 <!-- 2 200 4 300 6 400 8500 -->
