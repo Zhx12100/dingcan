@@ -1,4 +1,55 @@
 import * as echarts from '../../../ec-canvas/echarts';
+let chartPie1=1;
+function getOption(data) {
+  var option = {
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      bottom: '5%',
+      left: 'center',
+      formatter: function (name) {
+        return '{a|' + name + '}'
+      },
+      textStyle: {
+        backgroundColor: "transparent", // 文字块背景色，一定要加上，否则对齐不会生效
+        rich: {
+          a: {
+            width: 115
+          },
+        },
+      },
+    },
+    series: [{
+      name: 'Access From',
+      type: 'pie',
+      center: ['50%', '135'],
+      radius: ['40%', '70%'],
+      avoidLabelOverlap: false,
+      itemStyle: {
+        borderRadius: 10,
+        borderColor: '#fff',
+        borderWidth: 2
+      },
+      label: {
+        show: false,
+        position: 'center'
+      },
+      emphasis: {
+        label: {
+          show: false,
+          fontSize: '40',
+          fontWeight: 'bold'
+        }
+      },
+      labelLine: {
+        show: false
+      },
+      data: data
+    }]
+  };
+  return option
+}
 
 
 const app = getApp()
@@ -13,6 +64,7 @@ Component({
       start_date: '',
       end_date: '',
     },
+    form1Height:400,
     //加班餐工作日
     formData2: {
       start_date: '',
@@ -24,7 +76,8 @@ Component({
       end_date: '',
     },
     ec1: {
-      onInit: '',
+      
+      lazyLoad: true
     },
     ec2: {
       onInit: '',
@@ -69,6 +122,7 @@ Component({
         ['formData3.end_date']: end_date,
       })
       console.log(that.data.formData1)
+      this.echartsComponnet1 = this.selectComponent('#mychart-dom-pie1');
       that.getForm1()
     },
     moved: function () {
@@ -103,87 +157,84 @@ Component({
           that.setData({
             detail: res.data.data
           })
+          console.log(chartPie1)
+          
+          
+          that.onInit1()
+          
         }
       })
-      function initChart1(canvas, width, height, dpr) {
-        const chart = echarts.init(canvas, null, {
-          width: 320,
-          height: height,
-          devicePixelRatio: dpr // new
+    },
+
+    onInit1: function (){
+      this.echartsComponnet1.init((canvas, width, height) => {
+        //初始化echarts元素，绑定到全局变量，方便更改数据
+        chartPie1 = echarts.init(canvas, null, {
+          width: width,
+          height: height
         });
-        canvas.setChart(chart);
-      
-        var option = {
-          tooltip: {
-            trigger: 'item'
+        // canvas.setChart(chartPie1);
+        chartPie1.resize()
+        var data = [
+          {
+            value: 1048,
+            name: '区纪委监委机关'
           },
-          legend: {
-            bottom: '5%',
-            left: 'center',
-            formatter: function (name) {
-              return '{a|' + name + '}'
-            },
-            textStyle: {
-              backgroundColor: "transparent", // 文字块背景色，一定要加上，否则对齐不会生效
-              rich: {
-                a: {
-                  width: 115
-                },
-              },
-            },
+          {
+            value: 735,
+            name: '区纪委监委机关1'
           },
-          series: [{
-            name: 'Access From',
-            type: 'pie',
-            center: ['50%', '30%'],
-            radius: ['40%', '70%'],
-            avoidLabelOverlap: false,
-            itemStyle: {
-              borderRadius: 10,
-              borderColor: '#fff',
-              borderWidth: 2
-            },
-            label: {
-              show: false,
-              position: 'center'
-            },
-            emphasis: {
-              label: {
-                show: false,
-                fontSize: '40',
-                fontWeight: 'bold'
-              }
-            },
-            labelLine: {
-              show: false
-            },
-            data: [{
-                value: 1048,
-                name: '区纪委监委机关'
-              },
-              {
-                value: 735,
-                name: '区纪委监委机关1'
-              },
-              {
-                value: 580,
-                name: '区机关事务管2理局'
-              },
-              {
-                value: 484,
-                name: '区机关事3务管理局'
-              },
-              {
-                value: 300,
-                name: '区机关事4务管理局'
-              }
-            ]
-          }]
-        };
+          {
+            value: 580,
+            name: '区机关事务管2理局'
+          },
+          {
+            value: 484,
+            name: '区机关事3务管理局'
+          },
+          {
+            value: 300,
+            name: '区机关事4务管理局'
+          },
+          {
+            value: 300,
+            name: '区机关事4务管3理局'
+          },
+          {
+            value: 300,
+            name: '区机关事4务3管理局'
+          },
+          {
+            value: 300,
+            name: '区机关事4务3管理局'
+          },
+          {
+            value: 300,
+            name: '区机关事4务3管理局'
+          }
+        ]
+        var height;
+        if(data.length<=2){
+          height=200
+        }else{
+          height=200+Math.ceil((data.length-2)/2)*100
+        }
+        this.setData({
+          form1Height: height
+        })
+        chartPie1.setOption(getOption(data))
+        chartPie1.resize()
+      })
+      return chartPie1
       
-        chart.setOption(option);
-        return chart;
-      }
+      // chartPie1.resize();
+      // chartPie1.resize({height:this.form1Height})
+
+      //可以先不setOption，等数据加载好后赋值，
+      //不过那样没setOption前，echats元素是一片空白，体验不好，所有我先set。
+      // var xData = [1,2,3,4,5......];  // x轴数据 自己写
+      // var option = getOption(xData);
+      // chartLine.setOption(option);
     },
 
     bindDateChangeStart1: function (e) {

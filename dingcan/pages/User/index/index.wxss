@@ -58,6 +58,17 @@ page{
   color: #666666;
 }
 
+.notype .list{
+  width: 340rpx;
+  height: 220rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+  padding:  0 20rpx;
+}
+
+
 .notice{
   background: #FFFFFF;
   border-radius: 16rpx;

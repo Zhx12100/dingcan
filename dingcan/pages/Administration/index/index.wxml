@@ -24,9 +24,10 @@
 			</view>
 		</picker>
 	</view>
-	<view class="tubiao" style="height:{{form1Height+'0x'}}">
+	<view class="tubiao" style="height:{{form1Height+'px'}}">
 		<view class="containerCanvas">
-			<ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}"></ec-canvas>
+			<ec-canvas id="mychart-dom-pie1" canvas-id="mychart-pie" ec="{{ ec1 }}"></ec-canvas>
 		</view>
 	</view>
 </view>
+<!-- 2 200 4 300 6 400 8500 -->

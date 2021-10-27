@@ -8,13 +8,13 @@ Page({
     PageItems1: [
       {
         "text": "统计",
-        "iconPath": "/images/souye12x.png",
-        "selectedIconPath": "/images/souye22x.png"
+        "iconPath": "/images/tongji1.png",
+        "selectedIconPath": "/images/tongji2.png"
       },
       {
         "text": "审批",
-        "iconPath": "/images/shenpi12x.png",
-        "selectedIconPath": "/images/shenpi22x.png"
+        "iconPath": "/images/shenpi1.png",
+        "selectedIconPath": "/images/shenpi2.png"
       },
       {
         "text": "我的",
