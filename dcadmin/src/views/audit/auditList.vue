@@ -221,7 +221,7 @@
         <el-button size="medium" type="primary" @click="setDriver(true)">审核通过</el-button>
       </span>
     </el-dialog>
-    <el-dialog title="编辑公告" class="notice-box" :visible.sync="dialogVisibleNotice" width="600px">
+    <el-dialog title="编辑公告" class="notice-box" :close-on-click-modal="false" :visible.sync="dialogVisibleNotice" width="600px">
       <el-form ref="form2" :inline="false" label-width="auto" size="medium">
         <el-form-item label="标题">
           <el-input v-model="notice.title" />
