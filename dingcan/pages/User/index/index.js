@@ -68,7 +68,7 @@ Component({
       console.log(e)
       let that = this
       wx.navigateTo({
-        url: `/pages/gzc/gzc`
+        url: `/pages/User/gzc/gzc`
       })
     },
     goJbc(e) {

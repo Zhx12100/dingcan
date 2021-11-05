@@ -2,11 +2,12 @@ import * as echarts from '../../../ec-canvas/echarts';
 let chartPie1 = 1;
 let chartPie2 = 1;
 let chartPie3 = 1;
+let chartPie4 = 1;
 
 function getOption(data, top) {
   let count = 0;
-  data.forEach((v,i) =>{
-    count = v.value+count
+  data.forEach((v, i) => {
+    count = v.value + count
   })
   var option = {
     tooltip: {
@@ -60,7 +61,7 @@ function getOption(data, top) {
       label: {
         alignTo: 'edge',
         // formatter: '{name|{b}}\n{time|''}',
-        formatter:function (params) {
+        formatter: function (params) {
           // var val;
           // data.forEach((v, i) => {
           //   if (v.name == params.seriesName) {
@@ -92,6 +93,147 @@ function getOption(data, top) {
   return option
 }
 
+function getOption2(data, top, type) {
+  if (type == 0) {
+    let count = 0;
+    data.forEach((v, i) => {
+      count = v.value + count
+    })
+    var option = {
+      tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)",
+      },
+      disableTouch: true,
+      legend: {
+        bottom: '5%',
+        left: 'center',
+        formatter: function (name) {
+          var val
+          data.forEach((v, i) => {
+            if (v.name == name) {
+              val = v.value
+            }
+          })
+          return '{a|' + name + ' ' + val + '}'
+        },
+        textStyle: {
+          backgroundColor: "transparent", // 文字块背景色，一定要加上，否则对齐不会生效
+          rich: {
+            a: {
+              width: 115
+            },
+          },
+        },
+      },
+      series: [{
+        name: 'Access From',
+        type: 'pie',
+        center: ['50%', top],
+        radius: ['30%', '50%'],
+        avoidLabelOverlap: true,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: '#fff',
+          borderWidth: 2
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: '40',
+            fontWeight: 'bold'
+          }
+        },
+        label: {
+          alignTo: 'edge',
+          // formatter: '{name|{b}}\n{time|''}',
+          formatter: function (params) {
+            return `${params.name}\n${params.value} ${(Math.round(params.value/count * 10000) / 100.00)}%`
+          },
+          minMargin: 5,
+          edgeDistance: 10,
+          lineHeight: 15,
+          rich: {
+            time: {
+              fontSize: 10,
+              color: '#999'
+            }
+          }
+        },
+        labelLine: {
+          normal: {
+            show: true,
+            length: 5,
+            length2: 10
+          }
+        },
+        data: data
+      }]
+    };
+    return option
+  } else {
+    var seriesData = []
+    var leader_sum=0,worker_sum=0;
+    var counts = []
+    data.forEach((v,i) =>{
+      leader_sum = v.leader_sum+leader_sum
+      worker_sum = v.worker_sum+worker_sum
+    })
+    counts = [{name:'区领导用餐人数',value:leader_sum},{name:'工作人员用餐人数',value:worker_sum}]
+    var count = leader_sum + worker_sum
+    seriesData = [leader_sum,worker_sum]
+    console.log('seriesData',seriesData)
+    option = {
+      xAxis: {
+        type: 'category',
+        data: ['区领导用餐人数', '工作人员用餐人数']
+      },
+      yAxis: {
+        type: 'value'
+      },
+      legend: {data:['区领导用餐人数', '工作人员用餐人数']},
+      // legend: {
+      //   bottom: '5%',
+      //   left: 'center',
+      //   formatter: function (name) {
+      //     var val
+      //     counts.forEach((v, i) => {
+      //       if (v.name == name) {
+      //         val = v.value
+      //       }
+      //     })
+      //     return '{a|' + name + ' ' + val + '}'
+      //   },
+      //   textStyle: {
+      //     backgroundColor: "transparent", // 文字块背景色，一定要加上，否则对齐不会生效
+      //     rich: {
+      //       a: {
+      //         width: 115
+      //       },
+      //     },
+      //   },
+      // },
+      series: [{
+        data: seriesData,
+        type: 'bar',
+        barWidth : 50,
+        label: {
+          normal: {
+            show: true,
+            position: 'top',
+            // formatter: '{b}: {c}',
+            formatter: function (params) {
+              return `${params.value} ${(Math.round(params.value/count * 10000) / 100.00)}%`
+            },
+          },
+          
+        },
+      }]
+    };
+    return option
+  }
+}
+
 
 const app = getApp()
 Component({
@@ -118,6 +260,12 @@ Component({
       end_date: '',
     },
     form3Height: 400,
+    //当日订餐人数
+    formData4: {
+      date: '',
+    },
+    formData4Type: 0,
+    form4Height: 400,
     ec1: {
       lazyLoad: true
     },
@@ -127,7 +275,10 @@ Component({
     ec3: {
       lazyLoad: true
     },
-    isIOS:false,
+    ec4: {
+      lazyLoad: true
+    },
+    isIOS: false,
     switch1Checked: true,
   },
 
@@ -155,6 +306,7 @@ Component({
         d = d > 9 ? d : '0' + d;
         return y + '-' + m + '-' + d;
       };
+      var day = nowDate.getDate();
       var end_date = getFullDate(cloneNowDate.setDate(endOfMonth)); //当月最后一天
       var starDate = getFullDate(cloneNowDate.setDate(1)); //当月第一天
       that.setData({
@@ -164,18 +316,22 @@ Component({
         ['formData2.end_date']: end_date,
         ['formData3.start_date']: starDate,
         ['formData3.end_date']: end_date,
+        ['formData4.date']: `${fullYear}-${month<10?'0'+month:month}-${day<10?'0'+day:day}`,
       })
-      console.log(that.data.formData1)
+      console.log(that.data.formData4)
       that.getOt()
       that.getForm1()
       that.getForm2()
       that.getForm3()
+      that.getForm4()
       let res = wx.getSystemInfoSync();
       console.log(res)
-      if(res.platform == 'ios') {
-        this.setData({ isIOS: true })
+      if (res.platform == 'ios') {
+        this.setData({
+          isIOS: true
+        })
       }
-      console.log('ios',this.data.isIOS)
+      console.log('ios', this.data.isIOS)
     },
     moved: function () {
       console.log('moved')
@@ -246,6 +402,27 @@ Component({
           console.log('统计数据', res.data.data)
           wx.hideToast();
           that.onInit3(res.data.data)
+        }
+      })
+    },
+    //表格4
+    getForm4() {
+      let that = this
+      let data = that.data.formData4
+      wx.request({
+        url: app.globalData.baseUrl + '/admin/meal/date_order',
+        method: "post",
+        header: {
+          'token': app.globalData.token
+        },
+        // data: data,
+        data: {
+          date: "2021-10-27"
+        },
+        success: function (res) {
+          console.log('当日订餐人数', res.data.data)
+          wx.hideToast();
+          that.onInit4(res.data.data)
         }
       })
     },
@@ -513,7 +690,93 @@ Component({
       this.getForm3()
     },
 
-    getOt: function (){
+    qieZ: function () {
+      let that = this
+      if (that.data.formData4Type == 0) {
+        that.setData({
+          formData4Type: 1
+        })
+      } else {
+        that.setData({
+          formData4Type: 0
+        })
+      }
+      that.getForm4()
+    },
+    onInit4: function (data, type) {
+      var height;
+      console.log(this.data.formData4Type)
+      if (this.data.formData4Type == 0) { //饼图图
+        var datas = [{
+            value: data.ot_count,
+            name: '加班餐'
+          },
+          {
+            value: data.work_count,
+            name: '工作餐'
+          },
+        ]
+        if (datas.length <= 2) {
+          height = 200
+        } else {
+          height = 200 + Math.ceil((dadatasta.length - 2) / 2) * 60
+        }
+        this.setData({
+          form4Height: height
+        })
+        this.echartsComponnet4 = this.selectComponent('#mychart-dom-pie4');
+        const getPixelRatio = () => {
+          let pixelRatio = 0
+          wx.getSystemInfo({
+            success: function (res) {
+              pixelRatio = res.pixelRatio
+            },
+            fail: function () {
+              pixelRatio = 0
+            }
+          })
+          return pixelRatio
+        }
+        var dpr = getPixelRatio()
+        this.echartsComponnet4.init((canvas, width, height) => {
+          //初始化echarts元素，绑定到全局变量，方便更改数据
+          chartPie4 = echarts.init(canvas, null, {
+            width: width,
+            height: height,
+            devicePixelRatio: dpr
+          });
+          chartPie4.setOption(getOption2(datas, height / 3, this.data.formData4Type))
+        })
+        return chartPie4
+      } else {
+        this.echartsComponnet4 = this.selectComponent('#mychart-dom-pie4');
+        const getPixelRatio = () => {
+          let pixelRatio = 0
+          wx.getSystemInfo({
+            success: function (res) {
+              pixelRatio = res.pixelRatio
+            },
+            fail: function () {
+              pixelRatio = 0
+            }
+          })
+          return pixelRatio
+        }
+        var dpr = getPixelRatio()
+        this.echartsComponnet4.init((canvas, width, height) => {
+          //初始化echarts元素，绑定到全局变量，方便更改数据
+          chartPie4 = echarts.init(canvas, null, {
+            width: width,
+            height: height,
+            devicePixelRatio: dpr
+          });
+          chartPie4.setOption(getOption2(data.ot_result, height / 3, this.data.formData4Type))
+        })
+        return chartPie4
+      }
+    },
+
+    getOt: function () {
       let that = this
       wx.request({
         url: app.globalData.baseUrl + '/system/get_ot',
@@ -525,7 +788,7 @@ Component({
         success: function (res) {
           console.log('节假日加班餐', res.data.data)
           that.setData({
-            switch1Checked:res.data.data.ot_holiday_flag
+            switch1Checked: res.data.data.ot_holiday_flag
           })
         }
       })
@@ -541,7 +804,9 @@ Component({
         header: {
           'token': app.globalData.token
         },
-        data: {ot_holiday_flag:e.detail.value},
+        data: {
+          ot_holiday_flag: e.detail.value
+        },
         success: function (res) {
           console.log('设置', res.data.data)
         }

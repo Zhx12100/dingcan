@@ -70,7 +70,7 @@ Page({
       data: data,
       success: function (res) {
         console.log('绑定组织', res)
-        if (res.data.code == 1) {
+        if (res.data.code != 0) {
           wx.showToast({
             title: res.data.message,
             icon: 'error',

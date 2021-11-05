@@ -1,36 +1,42 @@
 {
-    "setting": {},
-    "condition": {
-        "plugin": {
-            "list": []
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/gzc/gzc",
+          "pathName": "pages/gzc/gzc",
+          "query": "",
+          "scene": null
         },
-        "game": {
-            "list": []
+        {
+          "name": "pages/jbc/jbc",
+          "pathName": "pages/jbc/jbc",
+          "query": "",
+          "scene": null
         },
-        "gamePlugin": {
-            "list": []
+        {
+          "name": "pages/my/my",
+          "pathName": "pages/my/my",
+          "query": "",
+          "scene": null
         },
-        "miniprogram": {
-            "list": [
-                {
-                    "name": "pages/gzc/gzc",
-                    "pathName": "pages/gzc/gzc",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/jbc/jbc",
-                    "pathName": "pages/jbc/jbc",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/my/my",
-                    "pathName": "pages/my/my",
-                    "query": "",
-                    "scene": null
-                }
-            ]
+        {
+          "name": "pages/bindingInfo/bindingInfo",
+          "pathName": "pages/bindingInfo/bindingInfo",
+          "query": "type=1",
+          "scene": null
         }
+      ]
     }
+  }
 }

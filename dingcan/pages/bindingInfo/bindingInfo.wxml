@@ -13,7 +13,7 @@
     <view class="cont">
       <view class="inp-box">
         <view class="ico">
-          <view class="title">ID号</view>
+          <view class="title">组织ID</view>
         </view>
         <view class="right">
           <view class="tips">

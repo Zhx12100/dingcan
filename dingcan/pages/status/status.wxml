@@ -4,7 +4,7 @@
       <icon class="icon-box-img" type="warn" size="93"></icon>
     </view>
     <view class='content'>
-      <text>该账号存在异常，请联系【{{phoneNumber}}】</text>
+      <text>该小程序仅限贵单位订餐负责人使用，如有订餐需求请联系本单位订餐负责人</text>
     </view>
   </view>
 </view>

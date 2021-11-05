@@ -2,6 +2,10 @@
 page{
     position: relative;
 }
+.adminiContent{
+    /* height: calc(100vh - 100rpx); */
+    /* overflow-y: scroll; */
+}
 .hent{
     height: 40rpx;
 }
@@ -44,6 +48,11 @@ page{
 .box .title2 .v2{
     font-size: 28rpx;
     color: #666666;
+}
+.box .title2 image{
+    width: 50rpx;
+    height: 50rpx!important;
+    object-fit: contain!important;
 }
 .box .search{
     display: flex;
