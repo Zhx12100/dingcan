@@ -191,6 +191,7 @@ function getOption2(data, top, type) {
       yAxis: {
         type: 'value'
       },
+      grid:{left:40,top:20,bottom:40,right:20},
       legend: {data:['区领导用餐人数', '工作人员用餐人数']},
       // legend: {
       //   bottom: '5%',
@@ -221,9 +222,9 @@ function getOption2(data, top, type) {
           normal: {
             show: true,
             position: 'top',
-            // formatter: '{b}: {c}',
+            // formatter: '{b}: {c}'  ${(Math.round(params.value/count * 10000) / 100.00)}%,
             formatter: function (params) {
-              return `${params.value} ${(Math.round(params.value/count * 10000) / 100.00)}%`
+              return `${params.value}`
             },
           },
           
@@ -264,8 +265,8 @@ Component({
     formData4: {
       date: '',
     },
-    formData4Type: 0,
-    form4Height: 400,
+    formData4Type: 1,
+    form4Height: 200,
     ec1: {
       lazyLoad: true
     },
@@ -309,6 +310,7 @@ Component({
       var day = nowDate.getDate();
       var end_date = getFullDate(cloneNowDate.setDate(endOfMonth)); //当月最后一天
       var starDate = getFullDate(cloneNowDate.setDate(1)); //当月第一天
+      console.log()
       that.setData({
         ['formData1.start_date']: starDate,
         ['formData1.end_date']: end_date,
@@ -417,7 +419,7 @@ Component({
         },
         // data: data,
         data: {
-          date: "2021-10-27"
+          date: that.data.formData4.date
         },
         success: function (res) {
           console.log('当日订餐人数', res.data.data)

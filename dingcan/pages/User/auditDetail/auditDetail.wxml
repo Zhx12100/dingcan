@@ -364,6 +364,6 @@
     </view>
   </view>
   <view class="operate-box" wx:if="{{detail.audit_status=='审核中'||detail.audit_status=='审核通过'}}">
-    <button class="audit-none" bindtap="cancelOrder">关闭订餐</button>
+    <button class="audit-none" bindtap="cancelOrder">取消订餐</button>
   </view>
 </view>
