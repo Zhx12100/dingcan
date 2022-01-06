@@ -265,6 +265,7 @@ Component({
     formData4: {
       date: '',
     },
+    ot_result:[],
     formData4Type: 1,
     form4Height: 200,
     ec1: {
@@ -281,6 +282,12 @@ Component({
     },
     isIOS: false,
     switch1Checked: true,
+    meal_time:[
+      {meal:'早餐',value:1,check:0},
+      {meal:'午餐',value:2,check:0},
+      {meal:'晚餐',value:3,check:1},
+    ],
+
   },
 
   lifetimes: {
@@ -401,8 +408,12 @@ Component({
         },
         data: data,
         success: function (res) {
-          console.log('统计数据', res.data.data)
+          console.log('加班餐(节假日)', res.data.data)
+          that.setData({
+            jjr:res.data.data
+          })
           wx.hideToast();
+          return false
           that.onInit3(res.data.data)
         }
       })
@@ -423,8 +434,50 @@ Component({
         },
         success: function (res) {
           console.log('当日订餐人数', res.data.data)
+          that.setData({
+            ot_result:res.data.data.ot_result
+          })
           wx.hideToast();
           that.onInit4(res.data.data)
+        }
+      })
+    },
+
+    changeMealTime: function (e) {
+      console.log(`switch发生change事件，携带值为`, e.detail.value)
+      // this.setData({
+      //   ['formData.meal_time']: e.detail.value*1
+      // })
+      let that = this
+      let str = ''
+      if(e.detail.value.indexOf('1')!=-1){
+        str += '1'
+      }else{
+        str += '0'
+      }
+      console.log(1,str)
+      if(e.detail.value.indexOf('2')!=-1){
+        str += '1'
+      }else{
+        str += '0'
+      }
+      console.log(1,str)
+      if(e.detail.value.indexOf('3')!=-1){
+        str += '1'
+      }else{
+        str += '0'
+      }
+      wx.request({
+        url: app.globalData.baseUrl + '/system/applet/set_ot',
+        method: "post",
+        header: {
+          'token': app.globalData.token
+        },
+        data: {
+          select_str: str
+        },
+        success: function (res) {
+          console.log('设置', res.data.data)
         }
       })
     },
@@ -708,6 +761,7 @@ Component({
     onInit4: function (data, type) {
       var height;
       console.log(this.data.formData4Type)
+      return false
       if (this.data.formData4Type == 0) { //饼图图
         var datas = [{
             value: data.ot_count,
@@ -789,8 +843,13 @@ Component({
         data: {},
         success: function (res) {
           console.log('节假日加班餐', res.data.data)
+          let meal_time = that.data.meal_time
+          res.data.data.morning=='0'?meal_time[0].check = 0:meal_time[0].check = 1
+          res.data.data.noon=='0'?meal_time[1].check = 0:meal_time[1].check = 1
+          res.data.data.night=='0'?meal_time[2].check = 0:meal_time[2].check = 1
           that.setData({
-            switch1Checked: res.data.data.ot_holiday_flag
+            switch1Checked: res.data.data.ot_holiday_flag,
+            meal_time:meal_time
           })
         }
       })

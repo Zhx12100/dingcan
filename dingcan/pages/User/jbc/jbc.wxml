@@ -74,12 +74,28 @@
           <view class="tips">
             <view class="input">
               <radio-group bindchange="changeMealTime" class="mealTime">
-                <label class="" wx:for="{{meal_time}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                <label class="" wx:if="{{(ot.morning=='1'&&type==3)||type==2}}">
                   <view class="select">
-                    <radio color="#3377FF" value="{{item.meal_id}}" checked="" />
+                    <radio color="#3377FF" value="1" checked="" />
                   </view>
                   <view class="info">
-                    <view class="name">{{item.meal}}</view>
+                    <view class="name">早餐</view>
+                  </view>
+                </label>
+                <label class="" wx:if="{{ot.noon=='1'&&type==3}}">
+                  <view class="select">
+                    <radio color="#3377FF" value="2" checked="" />
+                  </view>
+                  <view class="info">
+                    <view class="name">午餐</view>
+                  </view>
+                </label>
+                <label class="" wx:if="{{(ot.night=='1'&&type==3)||type==2}}">
+                  <view class="select">
+                    <radio color="#3377FF" value="3" checked="" />
+                  </view>
+                  <view class="info">
+                    <view class="name">晚餐</view>
                   </view>
                 </label>
               </radio-group>
@@ -87,7 +103,7 @@
           </view>
         </view>
       </view>
-      <view class="inp-box">
+      <view class="inp-box" wx:if="{{type==2}}">
         <view class="ico">
           <view class="title">
             区领导用餐人数：
@@ -100,7 +116,7 @@
           </view>
         </view>
       </view>
-      <view class="inp-box">
+      <view class="inp-box" wx:if="{{type==2}}">
         <view class="ico">
           <view class="title">
             工作人员用餐人数：
@@ -110,6 +126,19 @@
           <view class="tips">
             <input type="text" class="inputs" value="{{formData.worker_count}}" bindinput="bindWorkerCount"
               placeholder-style="color:#ccc;" placeholder="请填写 工作人员用餐人数" />
+          </view>
+        </view>
+      </view>
+      <view class="inp-box" wx:if="{{type==3}}">
+        <view class="ico">
+          <view class="title">
+            用餐人数：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <input type="text" class="inputs" value="{{formData.dining_count}}" bindinput="bindDiningCount"
+              placeholder-style="color:#ccc;" placeholder="请填写 用餐人数" />
           </view>
         </view>
       </view>

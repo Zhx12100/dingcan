@@ -8,13 +8,27 @@
 		<view class="title title2">
 			<view class="v1">当日订餐人数</view>
 			<view bindtap="qieZ">
-				<image src="/images/qie.png"></image>
+				<!-- <image src="/images/qie.png"></image> -->
 			</view>
 		</view>
-		<view class="tubiao" style="height:{{form4Height+'px'}}">
-			<view class="containerCanvas">
+		<view class="tubiao">
+			<!-- <view class="containerCanvas">
 				<ec-canvas id="mychart-dom-pie4" canvas-id="mychart-pie" ec="{{ ec4 }}"></ec-canvas>
 				<cover-view wx:if="{{isIOS}}" class="echart-mask"></cover-view>
+			</view> -->
+			<view class="table table1">
+				<view class="tr bg-w">
+					<view class="th th1">单位</view>
+					<view class="th th2">区领导用餐人数</view>
+					<view class="th th3">工作人员用餐人数</view>
+				</view>
+				<block wx:for="{{ot_result}}" wx:key="{[organize_id]}">
+					<view class="tr">
+						<view class="td td1">{{item.name}}</view>
+						<view class="td td2">{{item.leader_sum}}</view>
+						<view class="td td3">{{item.worker_sum}}</view>
+					</view>
+				</block>
 			</view>
 		</view>
 	</view>
@@ -74,12 +88,27 @@
 			</view>
 		</view>
 	</view>
-	
+
 	<view class="box">
 		<view class="title title2">
 			<view class="v1">加班餐 (节假日) 单位统计</view>
 			<view class="v2">预订功能
 				<switch checked="{{switch1Checked}}" bindchange="switch1Change" />
+			</view>
+		</view>
+		<view class="shiduan" wx:if="{{switch1Checked==true}}">
+			<view class="tit">可订餐时段</view>
+			<view class="select">
+				<checkbox-group bindchange="changeMealTime" class="mealTime">
+					<label class="" wx:for="{{meal_time}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+						<view class="select">
+							<checkbox color="#3377FF" value="{{item.value}}" checked="{{item.check}}" />
+						</view>
+						<view class="info">
+							<view class="name">{{item.meal}}</view>
+						</view>
+					</label>
+				</checkbox-group>
 			</view>
 		</view>
 		<view class="search">
@@ -101,16 +130,30 @@
 				</view>
 			</picker>
 		</view>
-		<view class="tubiao" style="height:{{form3Height+'px'}}">
-			<view class="containerCanvas">
-
+		<view class="tubiao">
+			<!-- <view class="containerCanvas">
 				<ec-canvas id="mychart-dom-pie3" canvas-id="mychart-pie" ec="{{ ec3 }}"></ec-canvas>
-
 				<cover-view wx:if="{{isIOS}}" class="echart-mask"></cover-view>
+			</view> -->
+			<view class="table table2">
+				<view class="tr bg-w">
+					<view class="th th1">单位</view>
+					<view class="th th2">早餐</view>
+					<view class="th th3">午餐</view>
+					<view class="th th4">晚餐</view>
+				</view>
+				<block wx:for="{{jjr}}" wx:key="{[organize_id]}">
+					<view class="tr">
+						<view class="td td1">{{item.organize_part}}</view>
+						<view class="td td2">{{item.morning_count}}</view>
+						<view class="td td3">{{item.noon_count}}</view>
+						<view class="td td4">{{item.night_count}}</view>
+					</view>
+				</block>
 			</view>
 		</view>
 	</view>
-	
+
 	<view class="hent"></view>
 	<view class="hent"></view>
 	<view class="hent"></view>

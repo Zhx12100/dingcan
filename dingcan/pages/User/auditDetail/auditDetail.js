@@ -29,6 +29,12 @@ Page({
         value: '其他原因',
         name: '其他原因',
         tips: ''
+      },
+      {
+        index : 3,
+        value: '该时段不开餐',
+        name: '该时段不开餐',
+        tips: ''
       }
     ],
     audit_index:'',

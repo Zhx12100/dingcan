@@ -43,6 +43,7 @@
       <view class="text">{{notice.update_time}}</view>
     </view>
     <view class="content">
-      {{notice.notice}}
+      <!-- {{notice.notice}} -->
+      <rich-text nodes="{{notice.notice}}"></rich-text>
     </view>
   </view>

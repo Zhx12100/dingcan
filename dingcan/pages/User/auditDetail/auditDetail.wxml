@@ -114,6 +114,48 @@
           </view>
         </view>
       </view>
+      <view class="inp-box"  wx:if="{{detail.meal_type==3}}">
+        <view class="ico">
+          <view class="title">
+            用餐人数：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">
+              {{detail.dining_count}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            申请时间：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">
+              {{detail.apply_time}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="inp-box">
+        <view class="ico">
+          <view class="title">
+            审核时间：
+          </view>
+        </view>
+        <view class="right">
+          <view class="tips">
+            <view class="input">
+              {{detail.audit_time}}
+            </view>
+          </view>
+        </view>
+      </view>
     </view>
     <view class="status-box">
       <image mode="widthFix" wx:if="{{detail.audit_status=='不通过'}}" src="/images/butongguo.png"></image>

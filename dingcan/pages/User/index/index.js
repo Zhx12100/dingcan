@@ -28,8 +28,10 @@ Component({
         },
         success: function (res) {
           console.log('获取公告', res.data)
+          let data = res.data.data
+          data.notice = data.notice.replace(/\n/g,"<br/>").replaceAll(" ","\xa0")
           that.setData({
-            notice: res.data.data
+            notice: data
           })
         }
       })

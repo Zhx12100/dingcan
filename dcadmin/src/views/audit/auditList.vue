@@ -140,13 +140,15 @@
         <el-form-item label="订餐房间：" v-if="detail.meal_type=='二楼工作餐'">
           {{ detail.work.room_no }}
         </el-form-item>
-        <el-form-item label="区领导用餐人数：" v-if="detail.meal_type!='二楼工作餐'">
+        <el-form-item label="区领导用餐人数：" v-if="detail.meal_type=='加班餐（工作日）'">
           {{ detail.leader_count }}
         </el-form-item>
-        <el-form-item label="工作人员用餐人数：">
+        <el-form-item label="工作人员用餐人数：" v-if="detail.meal_type=='加班餐（工作日）'">
           {{ detail.worker_count }}
         </el-form-item>
-
+        <el-form-item label="用餐人数：" v-if="detail.meal_type=='加班餐（节假日）'">
+          {{ detail.dining_count }}
+        </el-form-item>
         <el-form-item label="订餐日期：">
           {{ detail.reserve_date }}
         </el-form-item>
@@ -212,8 +214,8 @@
         <el-form-item label="审核时间：">
           {{ detail.audit_time }}
         </el-form-item>
-        <el-form-item label="理由：" v-if="detail.audit_status == '审核失败'">
-          {{ detail.audit_man }}
+        <el-form-item label="理由：" v-if="detail.audit_status == '不通过'">
+          {{ detail.audit_reason }}
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer" v-if="detail.audit_status == '审核中'">

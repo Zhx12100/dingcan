@@ -15,6 +15,7 @@ Page({
     ],
     detail: {
     },
+    type:'',
     loadingHidden: true,
     detailTop: 100,
     audit_reason: '',
@@ -26,12 +27,13 @@ Page({
       reserve_date:'',
       meal_time:'',
       meal_note: '',
-      // dining_count:'',
+      dining_count:'',
       leader_count:'',
       worker_count:'',
     },
     extra_file_name: '',
     id: '',
+    ot:'',
   },
 
   /**
@@ -47,10 +49,24 @@ Page({
     that.setData({
       id: options.id,
       startTime: `${yy}-${mm}-${dd}`,
-      ['formData.meal_type']:options.type*1
+      ['formData.meal_type']:options.type*1,
+      type:options.type
     })
     console.log(this.data.startTime)
-    
+    wx.request({
+      url: app.globalData.baseUrl + '/system/get_ot',
+      method: "post",
+      header: {
+        'token': app.globalData.token
+      },
+      data: {},
+      success: function (res) {
+        console.log('工作餐节假是否展示', res.data.data)
+        that.setData({
+          ot: res.data.data
+        })
+      }
+    })
     
     // that.getDetail()
     // that.showDetail()
@@ -113,6 +129,11 @@ Page({
       ['formData.worker_count']: e.detail.value*1
     })
   },
+  bindDiningCount: function (e) {
+    this.setData({
+      ['formData.dining_count']: e.detail.value*1
+    })
+  },
   bindStartTimeChange: function (e) {
 		console.log(`switch发生change事件，携带值为`, e.detail.value)
 		this.setData({
@@ -139,13 +160,33 @@ Page({
     // data.meet_id = that.data.id
     for(let key in data){
       console.log(key,data[key])
-      if(data[key]===''&&key!='meal_note'&&key!='order_id'){
+      if(data[key]===''&&key!='meal_note'&&key!='order_id'&&key!='dining_count'&&key!='leader_count'&&key!='worker_count'){
         wx.showToast({
           title: '请填写完整信息',
           icon: 'error',
           duration: 1000
         });
         return false
+      }
+      if(that.data.type==2){
+        if(data.leader_count===''||data.worker_count===''){
+          wx.showToast({
+            title: '请填写完整信息',
+            icon: 'error',
+            duration: 1000
+          });
+          return false
+        }
+      }
+      if(that.data.type==3){
+        if(data.dining_count===''){
+          wx.showToast({
+            title: '请填写完整信息',
+            icon: 'error',
+            duration: 1000
+          });
+          return false
+        }
       }
     }
     if (!(/^1[3456789]\d{9}$/.test(data.phone))) {

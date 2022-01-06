@@ -34,8 +34,8 @@ module.exports = {
     open: true,
     proxy:{
       '/':{
-        // target:'https://freight.coschat.com',
         target:'https://meal.coschat.com',
+        // target:'https://meals.coschat.com',
         changeOrigin:true
       }
     },
