@@ -44,7 +44,7 @@
 				</view>
 			</picker>
 			<view class="heng">至</view>
-			<picker mode="date" value="{{formData2.end_date}}" bindchange="bindDateChangeStart2">
+			<picker mode="date" value="{{formData2.end_date}}" bindchange="bindDateChangeEnd2">
 				<view class="picker date-box">
 					{{formData2.end_date}}
 					<view class="img-box">
@@ -121,7 +121,7 @@
 				</view>
 			</picker>
 			<view class="heng">至</view>
-			<picker mode="date" value="{{formData3.end_date}}" bindchange="bindDateChangeStart3">
+			<picker mode="date" value="{{formData3.end_date}}" bindchange="bindDateChangeEnd3">
 				<view class="picker date-box">
 					{{formData3.end_date}}
 					<view class="img-box">

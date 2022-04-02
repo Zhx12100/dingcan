@@ -178,16 +178,16 @@ Page({
           return false
         }
       }
-      if(that.data.type==3){
-        if(data.dining_count===''){
-          wx.showToast({
-            title: '请填写完整信息',
-            icon: 'error',
-            duration: 1000
-          });
-          return false
-        }
-      }
+      // if(that.data.type==3){
+      //   if(data.dining_count===''){
+      //     wx.showToast({
+      //       title: '请填写完整信息',
+      //       icon: 'error',
+      //       duration: 1000
+      //     });
+      //     return false
+      //   }
+      // }
     }
     if (!(/^1[3456789]\d{9}$/.test(data.phone))) {
 			wx.showToast({

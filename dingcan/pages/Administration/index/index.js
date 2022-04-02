@@ -556,7 +556,7 @@ Component({
       return chartPie1
     },
     onInit2: function (data) {
-      var data = data
+      var data = data?data:[]
       // var data = [{
       //     value: 1048,
       //     name: '区纪委监委机关'

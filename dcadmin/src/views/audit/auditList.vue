@@ -140,15 +140,15 @@
         <el-form-item label="订餐房间：" v-if="detail.meal_type=='二楼工作餐'">
           {{ detail.work.room_no }}
         </el-form-item>
-        <el-form-item label="区领导用餐人数：" v-if="detail.meal_type=='加班餐（工作日）'">
+        <el-form-item label="区领导用餐人数：" v-if="detail.meal_type=='加班餐（工作日）'||detail.meal_type=='加班餐（节假日）'">
           {{ detail.leader_count }}
         </el-form-item>
-        <el-form-item label="工作人员用餐人数：" v-if="detail.meal_type=='加班餐（工作日）'">
+        <el-form-item label="工作人员用餐人数：" v-if="detail.meal_type=='加班餐（工作日）'||detail.meal_type=='加班餐（节假日）'">
           {{ detail.worker_count }}
         </el-form-item>
-        <el-form-item label="用餐人数：" v-if="detail.meal_type=='加班餐（节假日）'">
+        <!-- <el-form-item label="用餐人数：" v-if="detail.meal_type=='加班餐（节假日）'">
           {{ detail.dining_count }}
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="订餐日期：">
           {{ detail.reserve_date }}
         </el-form-item>

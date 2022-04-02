@@ -103,7 +103,7 @@
           </view>
         </view>
       </view>
-      <view class="inp-box" wx:if="{{type==2}}">
+      <view class="inp-box" wx:if="{{type==2||type==3}}">
         <view class="ico">
           <view class="title">
             区领导用餐人数：
@@ -116,7 +116,7 @@
           </view>
         </view>
       </view>
-      <view class="inp-box" wx:if="{{type==2}}">
+      <view class="inp-box"  wx:if="{{type==2||type==3}}">
         <view class="ico">
           <view class="title">
             工作人员用餐人数：
@@ -129,7 +129,7 @@
           </view>
         </view>
       </view>
-      <view class="inp-box" wx:if="{{type==3}}">
+      <!-- <view class="inp-box" wx:if="{{type==3}}">
         <view class="ico">
           <view class="title">
             用餐人数：
@@ -141,7 +141,7 @@
               placeholder-style="color:#ccc;" placeholder="请填写 用餐人数" />
           </view>
         </view>
-      </view>
+      </view> -->
     </view>
   </view>
   <view class="remark-box">
